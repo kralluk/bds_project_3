@@ -67,16 +67,16 @@ public class EmployeesController {
 
         systemEmployeesTableView.getSortOrder().add(employeeId);
 
-        //initializeTableViewSelection();
+        initializeTableViewSelection();
         //loadIcons();
         //DODĚLAT
         logger.info("EmployeesController initialized");
     }
 
-   /* private void initializeTableViewSelection() {
-        MenuItem edit = new MenuItem("Edit employee");
+    private void initializeTableViewSelection() {
+        //MenuItem edit = new MenuItem("Edit employee");
         MenuItem detailedView = new MenuItem("Detailed employee view");
-        edit.setOnAction((ActionEvent event) -> {
+       /* edit.setOnAction((ActionEvent event) -> {
             EmployeeBasicView employeeView = systemEmployeeTableView.getSelectionModel().getSelectedItem();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -97,22 +97,22 @@ public class EmployeesController {
             } catch (IOException ex) {
                 ExceptionHandler.handleException(ex);
             }
-        });
+        });*/
 
         detailedView.setOnAction((ActionEvent event) -> {
-            EmployeeBasicView personView = systemEmployeesTableView.getSelectionModel().getSelectedItem();
+            EmployeeBasicView employeeView = systemEmployeesTableView.getSelectionModel().getSelectedItem();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(App.class.getResource("fxml/PersonsDetailView.fxml"));
+                fxmlLoader.setLocation(App.class.getResource("fxml/EmployeeDetailView.fxml"));
                 Stage stage = new Stage();
 
-                Long personId = personView.getEmployeeId();
-                PersonDetailView personDetailView = personService.getPersonDetailView(personId);
+                Long employeeId = employeeView.getEmployeeId();
+                EmployeeDetailView employeeDetailView = employeeService.getEmployeeDetailView(employeeId);
 
-                stage.setUserData(personDetailView);
-                stage.setTitle("BDS JavaFX Persons Detailed View");
+                stage.setUserData(employeeDetailView);
+                stage.setTitle("Employee Detailed View");
 
-                PersonsDetailViewController controller = new PersonsDetailViewController();
+                EmployeesDetailViewController controller = new EmployeesDetailViewController();
                 controller.setStage(stage);
                 fxmlLoader.setController(controller);
 
@@ -128,14 +128,14 @@ public class EmployeesController {
 
 
         ContextMenu menu = new ContextMenu();
-        menu.getItems().add(edit);
+        //menu.getItems().add(edit);
         menu.getItems().addAll(detailedView);
         systemEmployeesTableView.setContextMenu(menu);
     }
-*/
+
     private ObservableList<EmployeeBasicView> initializeEmployeesData() {
-        List<EmployeeBasicView> persons = employeeService.getEmployeesBasicView();
-        return FXCollections.observableArrayList(persons);
+        List<EmployeeBasicView> employees = employeeService.getEmployeesBasicView();
+        return FXCollections.observableArrayList(employees);
     }
 
     /*private void loadIcons() {

@@ -17,9 +17,9 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    /*public EmployeeDetailView getEmployeeDetailView(Long id) {
+    public EmployeeDetailView getEmployeeDetailView(Long id) {
         return employeeRepository.findEmployeeDetailedView(id);
-    }*/
+    }
 
     public List<EmployeeBasicView> getEmployeesBasicView() {
         return employeeRepository.getEmployeesBasicView();
