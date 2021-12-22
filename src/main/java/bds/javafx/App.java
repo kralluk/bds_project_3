@@ -17,11 +17,10 @@ public class App extends Application {
     private FXMLLoader loader;
     private VBox mainStage;
     public static void main(String[] args) {
-        launch();
-        /** System.out.println("KONECNE SEM TO SPUSTIL KURVO"); **/
+        launch(args);
     }
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage){
         try {
             loader = new FXMLLoader(getClass().getResource("/bds.javafx/App.fxml"));
             mainStage = loader.load();

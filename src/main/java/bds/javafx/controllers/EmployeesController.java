@@ -103,7 +103,7 @@ public class EmployeesController {
             EmployeeBasicView employeeView = systemEmployeesTableView.getSelectionModel().getSelectedItem();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(App.class.getResource("fxml/EmployeeDetailView.fxml"));
+                fxmlLoader.setLocation(App.class.getResource("/bds.javafx/fxml/EmployeeDetailView.fxml"));
                 Stage stage = new Stage();
 
                 Long employeeId = employeeView.getEmployeeId();
@@ -149,7 +149,7 @@ public class EmployeesController {
         System.exit(0);
     }
 
-    public void handleAddPersonButton(ActionEvent actionEvent) {
+    public void handleAddPersonButton(ActionEvent   actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(App.class.getResource("fxml/PersonsCreate.fxml"));

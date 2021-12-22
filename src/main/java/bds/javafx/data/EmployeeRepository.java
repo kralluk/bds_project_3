@@ -33,7 +33,7 @@ public class EmployeeRepository {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT e.employee_id, e.first_name, e.surname, e.email, b.building_name FROM employee e LEFT JOIN building b ON e.building_id = b.building_id ");
-             ResultSet resultSet = preparedStatement.executeQuery();) {
+             ResultSet resultSet = preparedStatement.executeQuery()) {
             List<EmployeeBasicView> employeeBasicViews = new ArrayList<>();
             while (resultSet.next()) {
                 employeeBasicViews.add(mapToEmployeeBasicView(resultSet));
@@ -60,13 +60,14 @@ public class EmployeeRepository {
     public EmployeeDetailView findEmployeeDetailedView(Long employeeId) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT e.employee_id, e.first_name, e.surname, e.email, b.building_name, j.job_type,j.salary, ehc.contract_expiration, eha.address_type, a.city, a.street, a.street_number, a.zip_code" +
+                     "SELECT e.employee_id, e.first_name, e.surname, e.email, b.building_name, j.job_type,j.salary," +
+                             " ehc.contract_expiration, eha.address_type, a.city, a.street, a.street_number, a.zip_code" +
                              "FROM employee e LEFT JOIN building b ON e.building_id = b.building_id " +
                              "JOIN employee_has_contract ehc ON ehc.employee_id = e.employee_ID" +
                              "JOIN job j ON j.job_id = ehc.job_id" +
-                             "JOIN employee_has_address eha ON eha.employee_id = e.employee_ID" +
-                             "JOIN address a ON a.address_id = eha.address_id;"+
-                             " WHERE e.employee_id = 5")
+                             "LEFT JOIN employee_has_address eha ON eha.employee_id = e.employee_ID" +
+                             "LEFT JOIN address a ON a.address_id = eha.address_id"+
+                             " WHERE e.employee_id = ?")
         ) {
             preparedStatement.setLong(1, employeeId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
