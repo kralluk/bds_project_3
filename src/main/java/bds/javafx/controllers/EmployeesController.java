@@ -74,13 +74,13 @@ public class EmployeesController {
     }
 
     private void initializeTableViewSelection() {
-        //MenuItem edit = new MenuItem("Edit employee");
+        MenuItem edit = new MenuItem("Edit employee");
         MenuItem detailedView = new MenuItem("Detailed employee view");
-       /* edit.setOnAction((ActionEvent event) -> {
-            EmployeeBasicView employeeView = systemEmployeeTableView.getSelectionModel().getSelectedItem();
+       edit.setOnAction((ActionEvent event) -> {
+            EmployeeBasicView employeeView = systemEmployeesTableView.getSelectionModel().getSelectedItem();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(App.class.getResource("fxml/PersonEdit.fxml"));
+                fxmlLoader.setLocation(App.class.getResource("/bds.javafx/fxml/PersonEdit.fxml"));
                 Stage stage = new Stage();
                 stage.setUserData(employeeView);
                 stage.setTitle("BDS JavaFX Edit Employee");
@@ -97,7 +97,7 @@ public class EmployeesController {
             } catch (IOException ex) {
                 ExceptionHandler.handleException(ex);
             }
-        });*/
+        });
 
         detailedView.setOnAction((ActionEvent event) -> {
             EmployeeBasicView employeeView = systemEmployeesTableView.getSelectionModel().getSelectedItem();
@@ -107,12 +107,13 @@ public class EmployeesController {
                 Stage stage = new Stage();
 
                 Long employeeId = employeeView.getEmployeeId();
+                System.out.println(employeeId);
                 EmployeeDetailView employeeDetailView = employeeService.getEmployeeDetailView(employeeId);
 
                 stage.setUserData(employeeDetailView);
                 stage.setTitle("Employee Detailed View");
 
-                EmployeesDetailViewController controller = new EmployeesDetailViewController();
+                 EmployeesDetailViewController controller = new EmployeesDetailViewController();
                 controller.setStage(stage);
                 fxmlLoader.setController(controller);
 
@@ -128,7 +129,7 @@ public class EmployeesController {
 
 
         ContextMenu menu = new ContextMenu();
-        //menu.getItems().add(edit);
+        menu.getItems().add(edit);
         menu.getItems().addAll(detailedView);
         systemEmployeesTableView.setContextMenu(menu);
     }
