@@ -24,9 +24,7 @@ public class App extends Application {
         try {
             loader = new FXMLLoader(getClass().getResource("/bds.javafx/App.fxml"));
             mainStage = loader.load();
-            // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/bds.javafx/App_ss.fxml"));
             Scene scene = new Scene(mainStage);
-            // Scene scene = new Scene(fxmlLoader.load(), 320, 240);
             stage.setTitle("Hello!");
             stage.setScene(scene);
             stage.show();

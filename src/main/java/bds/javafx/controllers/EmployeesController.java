@@ -80,7 +80,7 @@ public class EmployeesController {
             EmployeeBasicView employeeView = systemEmployeesTableView.getSelectionModel().getSelectedItem();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(App.class.getResource("/bds.javafx/fxml/PersonEdit.fxml"));
+                fxmlLoader.setLocation(App.class.getResource("/bds.javafx/fxml/EmployeeEdit.fxml"));
                 Stage stage = new Stage();
                 stage.setUserData(employeeView);
                 stage.setTitle("BDS JavaFX Edit Employee");
@@ -113,7 +113,7 @@ public class EmployeesController {
                 stage.setUserData(employeeDetailView);
                 stage.setTitle("Employee Detailed View");
 
-                 EmployeesDetailViewController controller = new EmployeesDetailViewController();
+                EmployeesDetailViewController controller = new EmployeesDetailViewController();
                 controller.setStage(stage);
                 fxmlLoader.setController(controller);
 
