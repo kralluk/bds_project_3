@@ -4,7 +4,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import bds.javafx.api.EmployeeBasicView;
 //import bds.javafx.api.EmployeeCreateView;
 import bds.javafx.api.EmployeeDetailView;
-//import bds.javafx.api.EmployeeEditView;
+import bds.javafx.api.EmployeeEditView;
 import bds.javafx.data.EmployeeRepository;
 
 import java.util.List;
@@ -24,7 +24,9 @@ public class EmployeeService {
     public List<EmployeeBasicView> getEmployeesBasicView() {
         return employeeRepository.getEmployeesBasicView();
     }
-
+    public void editEmployee(EmployeeEditView employeeEditView) {
+        employeeRepository.editEmployee(employeeEditView);
+    }
     /*public void createEmployee(EmployeeCreateView employeeCreateView) {
         // the following three lines can be written in one code line (only for more clear explanation it is written in three lines
         char[] originalPassword = employeeCreateView.getPwd();

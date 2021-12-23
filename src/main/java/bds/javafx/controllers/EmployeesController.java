@@ -74,13 +74,13 @@ public class EmployeesController {
     }
 
     private void initializeTableViewSelection() {
-        //MenuItem edit = new MenuItem("Edit employee");
+        MenuItem edit = new MenuItem("Edit employee");
         MenuItem detailedView = new MenuItem("Detailed employee view");
-       /* edit.setOnAction((ActionEvent event) -> {
-            EmployeeBasicView employeeView = systemEmployeeTableView.getSelectionModel().getSelectedItem();
+       edit.setOnAction((ActionEvent event) -> {
+            EmployeeBasicView employeeView = systemEmployeesTableView.getSelectionModel().getSelectedItem();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(App.class.getResource("fxml/PersonEdit.fxml"));
+                fxmlLoader.setLocation(App.class.getResource("/bds.javafx/fxml/EmployeeEdit.fxml"));
                 Stage stage = new Stage();
                 stage.setUserData(employeeView);
                 stage.setTitle("BDS JavaFX Edit Employee");
@@ -97,7 +97,7 @@ public class EmployeesController {
             } catch (IOException ex) {
                 ExceptionHandler.handleException(ex);
             }
-        });*/
+        });
 
         detailedView.setOnAction((ActionEvent event) -> {
             EmployeeBasicView employeeView = systemEmployeesTableView.getSelectionModel().getSelectedItem();
@@ -116,7 +116,7 @@ public class EmployeesController {
                 controller.setStage(stage);
                 fxmlLoader.setController(controller);
 
-                Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+                Scene scene = new Scene(fxmlLoader.load());
 
                 stage.setScene(scene);
 
@@ -128,7 +128,7 @@ public class EmployeesController {
 
 
         ContextMenu menu = new ContextMenu();
-        //menu.getItems().add(edit);
+        menu.getItems().add(edit);
         menu.getItems().addAll(detailedView);
         systemEmployeesTableView.setContextMenu(menu);
     }
@@ -174,6 +174,7 @@ public class EmployeesController {
         ObservableList<EmployeeBasicView> observableEmployeesList = initializeEmployeesData();
         systemEmployeesTableView.setItems(observableEmployeesList);
         systemEmployeesTableView.refresh();
-        systemEmployeesTableView.sort();
+        //systemEmployeesTableView.sort();
+        systemEmployeesTableView.getSortOrder().add(employeeId);
     }
 }

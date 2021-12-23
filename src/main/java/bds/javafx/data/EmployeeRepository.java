@@ -43,7 +43,7 @@ public class EmployeeRepository {
             throw new DataAccessException("Employee basic view could not be loaded.", e);
         }
     }
-    public List<EmployeeBasicView> findAll() {
+   /* public List<EmployeeBasicView> findAll() {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT employee_id, first_name, surname, first_name, surname, email, building_id FROM employee");
@@ -56,20 +56,23 @@ public class EmployeeRepository {
         } catch (SQLException e) {
             throw new DataAccessException("Find all users SQL failed.", e);
         }
-    }
+    }*/
     public EmployeeDetailView findEmployeeDetailedView(Long employeeId) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT e.employee_id, e.first_name, e.surname, e.email, b.building_name, j.job_type,j.salary," +
-                             " ehc.contract_expiration, eha.address_type, a.city, a.street, a.street_number, a.zip_code" +
-                             "FROM employee e LEFT JOIN building b ON e.building_id = b.building_id " +
-                             "JOIN employee_has_contract ehc ON ehc.employee_id = e.employee_ID" +
-                             "JOIN job j ON j.job_id = ehc.job_id" +
-                             "LEFT JOIN employee_has_address eha ON eha.employee_id = e.employee_ID" +
-                             "LEFT JOIN address a ON a.address_id = eha.address_id"+
+                 /*    "SELECT e.employee_id, e.first_name, e.surname, e.email, b.building_name FROM employee e" +
+                             " LEFT JOIN building b ON e.building_id = b.building_id WHERE e.employee_id = ?")*/
+                     "SELECT e.employee_id, first_name, surname, email, building_name, job_type,salary," +
+                        "contract_expiration, address_type, city, street, street_number, zip_code" +
+                             " FROM employee e LEFT JOIN building b ON e.building_id = b.building_id " +
+                             " LEFT JOIN employee_has_contract ehc ON ehc.employee_id = e.employee_id" +
+                             " LEFT JOIN job j ON j.job_id = ehc.job_id" +
+                             " LEFT JOIN employee_has_address eha ON eha.employee_id = e.employee_id" +
+                             " LEFT JOIN address a ON a.address_id = eha.address_id"+
                              " WHERE e.employee_id = ?")
         ) {
             preparedStatement.setLong(1, employeeId);
+            System.out.println(employeeId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return mapToEmployeeDetailView(resultSet);
@@ -80,6 +83,44 @@ public class EmployeeRepository {
         }
         return null;
     }
+    public void editEmployee(EmployeeEditView employeeEditView) {
+        String insertEmployeeSQL = "UPDATE employee e SET email = ?, first_name = ?, surname = ? WHERE e.employee_id = ?";
+        String checkIfExists = "SELECT email FROM employee e WHERE e.employee_id = ?";
+        try (Connection connection = DataSourceConfig.getConnection();
+             // would be beneficial if I will return the created entity back
+             PreparedStatement preparedStatement = connection.prepareStatement(insertEmployeeSQL, Statement.RETURN_GENERATED_KEYS)) {
+            // set prepared statement variables
+            preparedStatement.setString(1, employeeEditView.getEmail());
+            preparedStatement.setString(2, employeeEditView.getFirstName());
+            preparedStatement.setString(3, employeeEditView.getSurname());
+           // preparedStatement.setString(3, employeeEditView.getBuilding());
+            preparedStatement.setLong(4, employeeEditView.getId());
+
+            try {
+                connection.setAutoCommit(false);
+                try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
+                    ps.setLong(1, employeeEditView.getId());
+                    ps.execute();
+                } catch (SQLException e) {
+                    throw new DataAccessException("This employee for edit do not exists.");
+                }
+
+                int affectedRows = preparedStatement.executeUpdate();
+
+                if (affectedRows == 0) {
+                    throw new DataAccessException("Creating employee failed, no rows affected.");
+                }
+                connection.commit();
+            } catch (SQLException e) {
+                connection.rollback();
+            } finally {
+                connection.setAutoCommit(true);
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException("Creating employee failed operation on the database failed.");
+        }
+    }
+
     private EmployeeAuthView mapToEmployeeAuth(ResultSet rs) throws SQLException {
         EmployeeAuthView employee = new EmployeeAuthView();
         employee.setEmail(rs.getString("email"));
@@ -88,13 +129,13 @@ public class EmployeeRepository {
     }
 
     private EmployeeBasicView mapToEmployeeBasicView(ResultSet rs) throws SQLException {
-        EmployeeBasicView employee = new EmployeeBasicView();
-        employee.setEmployeeId(rs.getLong("employee_id"));
-        employee.setFirstName(rs.getString("first_name"));
-        employee.setSurname(rs.getString("surname"));
-        employee.setEmail(rs.getString("email"));
-        employee.setBuilding(rs.getString("building_name"));
-        return employee;
+        EmployeeBasicView employeeBasicView = new EmployeeBasicView();
+        employeeBasicView.setEmployeeId(rs.getLong("employee_id"));
+        employeeBasicView.setFirstName(rs.getString("first_name"));
+        employeeBasicView.setSurname(rs.getString("surname"));
+        employeeBasicView.setEmail(rs.getString("email"));
+        employeeBasicView.setBuilding(rs.getString("building_name"));
+        return employeeBasicView;
     }
     private EmployeeDetailView mapToEmployeeDetailView(ResultSet rs) throws SQLException {
         EmployeeDetailView employeeDetailView = new EmployeeDetailView();
@@ -105,8 +146,8 @@ public class EmployeeRepository {
         employeeDetailView.setBuilding(rs.getString("building_name"));
         employeeDetailView.setCity(rs.getString("city"));
         employeeDetailView.setSalary(rs.getLong("salary"));
-        employeeDetailView.setContractExpiration("contract_expiration");
-        employeeDetailView.setAddressType("address_type");
+        employeeDetailView.setContractExpiration(rs.getString("contract_expiration"));
+        employeeDetailView.setAddressType(rs.getString("address_type"));
         employeeDetailView.setJobType(rs.getString("job_type"));
         employeeDetailView.setStreet(rs.getString("street"));
         employeeDetailView.setStreetNumber(rs.getLong("street_number"));
