@@ -1,0 +1,76 @@
+Index: src/main/java/bds/javafx/controllers/EmployeesController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package bds.javafx.controllers;\r\n\r\nimport javafx.collections.FXCollections;\r\nimport javafx.collections.ObservableList;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.cell.PropertyValueFactory;\r\nimport javafx.stage.Stage;\r\nimport bds.javafx.App;\r\nimport bds.javafx.api.EmployeeBasicView;\r\nimport bds.javafx.api.EmployeeDetailView;\r\nimport bds.javafx.data.EmployeeRepository;\r\nimport bds.javafx.exceptions.ExceptionHandler;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.control.*;\r\nimport javafx.scene.image.Image;\r\nimport javafx.scene.image.ImageView;\r\nimport bds.javafx.services.EmployeeService;\r\nimport org.slf4j.Logger;\r\nimport org.slf4j.LoggerFactory;\r\n\r\n\r\nimport java.io.IOException;\r\nimport java.util.List;\r\n\r\npublic class EmployeesController {\r\n\r\n    private static final Logger logger = LoggerFactory.getLogger(EmployeesController.class);\r\n\r\n    @FXML\r\n    private TableColumn<EmployeeBasicView, Long> employeeId;\r\n    @FXML\r\n    private TableColumn<EmployeeBasicView, String> FirstName;\r\n    @FXML\r\n    private TableColumn<EmployeeBasicView, String> Surname;\r\n    @FXML\r\n    private TableColumn<EmployeeBasicView, String> Email;\r\n    @FXML\r\n    private TableColumn<EmployeeBasicView, String> Building;\r\n    @FXML\r\n    private TableView<EmployeeBasicView> systemEmployeesTableView;\r\n//    @FXML\r\n// to už bylo zakomentovane   public MenuItem exitMenuItem;\r\n\r\n    private EmployeeService employeeService;\r\n    private EmployeeRepository employeeRepository;\r\n\r\n    public EmployeesController() {\r\n    }\r\n\r\n    @FXML\r\n    private void initialize() {\r\n        employeeRepository = new EmployeeRepository();\r\n        employeeService = new EmployeeService(employeeRepository);\r\n//        GlyphsDude.setIcon(exitMenuItem, FontAwesomeIcon.CLOSE, \"1em\");\r\n\r\n        employeeId.setCellValueFactory(new PropertyValueFactory<EmployeeBasicView, Long>(\"id\"));\r\n        FirstName.setCellValueFactory(new PropertyValueFactory<EmployeeBasicView, String>(\"firstname\"));\r\n        Surname.setCellValueFactory(new PropertyValueFactory<EmployeeBasicView, String>(\"surname\"));\r\n        Email.setCellValueFactory(new PropertyValueFactory<EmployeeBasicView, String>(\"email\"));\r\n        Building.setCellValueFactory(new PropertyValueFactory<EmployeeBasicView, String>(\"building\"));\r\n\r\n\r\n        ObservableList<EmployeeBasicView> observableEmployeesList = initializeEmployeesData();\r\n        systemEmployeesTableView.setItems(observableEmployeesList);\r\n\r\n        systemEmployeesTableView.getSortOrder().add(employeeId);\r\n\r\n        initializeTableViewSelection();\r\n        //loadIcons();\r\n        //DODĚLAT\r\n        logger.info(\"EmployeesController initialized\");\r\n    }\r\n\r\n    private void initializeTableViewSelection() {\r\n        //MenuItem edit = new MenuItem(\"Edit employee\");\r\n        MenuItem detailedView = new MenuItem(\"Detailed employee view\");\r\n       /* edit.setOnAction((ActionEvent event) -> {\r\n            EmployeeBasicView employeeView = systemEmployeeTableView.getSelectionModel().getSelectedItem();\r\n            try {\r\n                FXMLLoader fxmlLoader = new FXMLLoader();\r\n                fxmlLoader.setLocation(App.class.getResource(\"fxml/PersonEdit.fxml\"));\r\n                Stage stage = new Stage();\r\n                stage.setUserData(employeeView);\r\n                stage.setTitle(\"BDS JavaFX Edit Employee\");\r\n\r\n                EmployeeEditController controller = new EmployeeEditController();\r\n                controller.setStage(stage);\r\n                fxmlLoader.setController(controller);\r\n\r\n                Scene scene = new Scene(fxmlLoader.load(), 600, 500);\r\n\r\n                stage.setScene(scene);\r\n\r\n                stage.show();\r\n            } catch (IOException ex) {\r\n                ExceptionHandler.handleException(ex);\r\n            }\r\n        });*/\r\n\r\n        detailedView.setOnAction((ActionEvent event) -> {\r\n            EmployeeBasicView employeeView = systemEmployeesTableView.getSelectionModel().getSelectedItem();\r\n            try {\r\n                FXMLLoader fxmlLoader = new FXMLLoader();\r\n                fxmlLoader.setLocation(App.class.getResource(\"/bds.javafx/fxml/EmployeeDetailView.fxml\"));\r\n                Stage stage = new Stage();\r\n\r\n                Long employeeId = employeeView.getEmployeeId();\r\n                EmployeeDetailView employeeDetailView = employeeService.getEmployeeDetailView(employeeId);\r\n\r\n                stage.setUserData(employeeDetailView);\r\n                stage.setTitle(\"Employee Detailed View\");\r\n\r\n                EmployeesDetailViewController controller = new EmployeesDetailViewController();\r\n                controller.setStage(stage);\r\n                fxmlLoader.setController(controller);\r\n\r\n                Scene scene = new Scene(fxmlLoader.load(), 600, 500);\r\n\r\n                stage.setScene(scene);\r\n\r\n                stage.show();\r\n            } catch (IOException ex) {\r\n                ExceptionHandler.handleException(ex);\r\n            }\r\n        });\r\n\r\n\r\n        ContextMenu menu = new ContextMenu();\r\n        //menu.getItems().add(edit);\r\n        menu.getItems().addAll(detailedView);\r\n        systemEmployeesTableView.setContextMenu(menu);\r\n    }\r\n\r\n    private ObservableList<EmployeeBasicView> initializeEmployeesData() {\r\n        List<EmployeeBasicView> employees = employeeService.getEmployeesBasicView();\r\n        return FXCollections.observableArrayList(employees);\r\n    }\r\n\r\n    /*private void loadIcons() {\r\n        Image vutLogoImage = new Image(App.class.getResourceAsStream(\"logos/vut-logo-eng.png\"));\r\n        ImageView vutLogo = new ImageView(vutLogoImage);\r\n        vutLogo.setFitWidth(150);\r\n        vutLogo.setFitHeight(50);\r\n    }*/\r\n\r\n    public void handleExitMenuItem(ActionEvent event) {\r\n        System.exit(0);\r\n    }\r\n\r\n    public void handleAddPersonButton(ActionEvent   actionEvent) {\r\n        try {\r\n            FXMLLoader fxmlLoader = new FXMLLoader();\r\n            fxmlLoader.setLocation(App.class.getResource(\"fxml/PersonsCreate.fxml\"));\r\n            Scene scene = new Scene(fxmlLoader.load(), 600, 500);\r\n            Stage stage = new Stage();\r\n            stage.setTitle(\"BDS JavaFX Create Person\");\r\n            stage.setScene(scene);\r\n\r\n//            Stage stageOld = (Stage) signInButton.getScene().getWindow();\r\n//            stageOld.close();\r\n//\r\n//            stage.getIcons().add(new Image(App.class.getResourceAsStream(\"logos/vut.jpg\")));\r\n//            authConfirmDialog();\r\n\r\n            stage.show();\r\n        } catch (IOException ex) {\r\n            ExceptionHandler.handleException(ex);\r\n        }\r\n    }\r\n\r\n    public void handleRefreshButton(ActionEvent actionEvent) {\r\n        ObservableList<EmployeeBasicView> observableEmployeesList = initializeEmployeesData();\r\n        systemEmployeesTableView.setItems(observableEmployeesList);\r\n        systemEmployeesTableView.refresh();\r\n        systemEmployeesTableView.sort();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/bds/javafx/controllers/EmployeesController.java b/src/main/java/bds/javafx/controllers/EmployeesController.java
+--- a/src/main/java/bds/javafx/controllers/EmployeesController.java	(revision cc154f591727c05c223c6542725bc47364ef2e7e)
++++ b/src/main/java/bds/javafx/controllers/EmployeesController.java	(date 1640274911781)
+@@ -116,7 +116,7 @@
+                 controller.setStage(stage);
+                 fxmlLoader.setController(controller);
+ 
+-                Scene scene = new Scene(fxmlLoader.load(), 600, 500);
++                Scene scene = new Scene(fxmlLoader.load());
+ 
+                 stage.setScene(scene);
+ 
+@@ -174,6 +174,7 @@
+         ObservableList<EmployeeBasicView> observableEmployeesList = initializeEmployeesData();
+         systemEmployeesTableView.setItems(observableEmployeesList);
+         systemEmployeesTableView.refresh();
+-        systemEmployeesTableView.sort();
++        //systemEmployeesTableView.sort();
++        systemEmployeesTableView.getSortOrder().add(employeeId);
+     }
+ }
+Index: src/main/resources/bds.javafx/fxml/Employees.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.*?>\r\n<?import javafx.scene.layout.*?>\r\n\r\n<AnchorPane prefHeight=\"400.0\" prefWidth=\"600.0\" xmlns=\"http://javafx.com/javafx/11.0.2\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"bds.javafx.controllers.EmployeesController\">\r\n   <children>\r\n      <TableView fx:id=\"systemEmployeesTableView\" layoutX=\"20.0\" layoutY=\"42.0\" prefHeight=\"344.0\" prefWidth=\"550.0\">\r\n        <columns>\r\n          <TableColumn fx:id=\"employeeId\" prefWidth=\"110.0\" text=\"ID\" />\r\n          <TableColumn fx:id=\"FirstName\" prefWidth=\"110.0\" text=\"Firstname\" />\r\n            <TableColumn fx:id=\"Surname\" prefWidth=\"110.0\" text=\"Surname\" />\r\n            <TableColumn fx:id=\"Email\" prefWidth=\"110.0\" text=\"Email\" />\r\n            <TableColumn fx:id=\"Building\" prefWidth=\"110.0\" text=\"Building\" />\r\n        </columns>\r\n      </TableView>\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/bds.javafx/fxml/Employees.fxml b/src/main/resources/bds.javafx/fxml/Employees.fxml
+--- a/src/main/resources/bds.javafx/fxml/Employees.fxml	(revision cc154f591727c05c223c6542725bc47364ef2e7e)
++++ b/src/main/resources/bds.javafx/fxml/Employees.fxml	(date 1640274911788)
+@@ -5,7 +5,7 @@
+ 
+ <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bds.javafx.controllers.EmployeesController">
+    <children>
+-      <TableView fx:id="systemEmployeesTableView" layoutX="20.0" layoutY="42.0" prefHeight="344.0" prefWidth="550.0">
++      <TableView fx:id="systemEmployeesTableView" layoutX="25.0" layoutY="21.0" prefHeight="344.0" prefWidth="550.0">
+         <columns>
+           <TableColumn fx:id="employeeId" prefWidth="110.0" text="ID" />
+           <TableColumn fx:id="FirstName" prefWidth="110.0" text="Firstname" />
+@@ -13,6 +13,8 @@
+             <TableColumn fx:id="Email" prefWidth="110.0" text="Email" />
+             <TableColumn fx:id="Building" prefWidth="110.0" text="Building" />
+         </columns>
++
+       </TableView>
++      <Button fx:id="refreshButton" layoutX="274.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
+    </children>
+ </AnchorPane>
+Index: src/main/java/bds/javafx/services/EmployeeService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package bds.javafx.services;\r\n\r\nimport at.favre.lib.crypto.bcrypt.BCrypt;\r\nimport bds.javafx.api.EmployeeBasicView;\r\n//import bds.javafx.api.EmployeeCreateView;\r\nimport bds.javafx.api.EmployeeDetailView;\r\n//import bds.javafx.api.EmployeeEditView;\r\nimport bds.javafx.data.EmployeeRepository;\r\n\r\nimport java.util.List;\r\n\r\npublic class EmployeeService {\r\n\r\n    private EmployeeRepository employeeRepository;\r\n\r\n    public EmployeeService(EmployeeRepository employeeRepository) {\r\n        this.employeeRepository = employeeRepository;\r\n    }\r\n\r\n    public EmployeeDetailView getEmployeeDetailView(Long id) {\r\n        return employeeRepository.findEmployeeDetailedView(id);\r\n    }\r\n\r\n    public List<EmployeeBasicView> getEmployeesBasicView() {\r\n        return employeeRepository.getEmployeesBasicView();\r\n    }\r\n\r\n    /*public void createEmployee(EmployeeCreateView employeeCreateView) {\r\n        // the following three lines can be written in one code line (only for more clear explanation it is written in three lines\r\n        char[] originalPassword = employeeCreateView.getPwd();\r\n        char[] hashedPassword = hashPassword(originalPassword);\r\n        employeeCreateView.setPwd(hashedPassword);\r\n\r\n        employeeRepository.createEmployee(employeeCreateView);\r\n    }\r\n\r\n    public void editEmployee(EmployeeEditView employeeEditView) {\r\n        employeeRepository.editEmployee(employeeEditView);\r\n    }*/\r\n\r\n    /**\r\n     * <p>\r\n     * Note: For implementation details see: https://github.com/patrickfav/bcrypt\r\n     * </p>\r\n     *\r\n     * @param password to be hashed\r\n     * @return hashed password\r\n     */\r\n    private char[] hashPassword(char[] password) {\r\n        return BCrypt.withDefaults().hashToChar(12, password);\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/bds/javafx/services/EmployeeService.java b/src/main/java/bds/javafx/services/EmployeeService.java
+--- a/src/main/java/bds/javafx/services/EmployeeService.java	(revision cc154f591727c05c223c6542725bc47364ef2e7e)
++++ b/src/main/java/bds/javafx/services/EmployeeService.java	(date 1640274911794)
+@@ -34,9 +34,6 @@
+         employeeRepository.createEmployee(employeeCreateView);
+     }
+ 
+-    public void editEmployee(EmployeeEditView employeeEditView) {
+-        employeeRepository.editEmployee(employeeEditView);
+-    }*/
+ 
+     /**
+      * <p>
