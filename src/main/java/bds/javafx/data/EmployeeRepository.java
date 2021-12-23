@@ -60,16 +60,19 @@ public class EmployeeRepository {
     public EmployeeDetailView findEmployeeDetailedView(Long employeeId) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
+                 /*    "SELECT e.employee_id, e.first_name, e.surname, e.email, b.building_name FROM employee e" +
+                             " LEFT JOIN building b ON e.building_id = b.building_id WHERE e.employee_id = ?")*/
                      "SELECT e.employee_id, first_name, surname, email, building_name, job_type,salary," +
                         "contract_expiration, address_type, city, street, street_number, zip_code" +
-                             "FROM employee e LEFT JOIN building b ON e.building_id = b.building_id " +
-                             "LEFT JOIN employee_has_contract ehc ON ehc.employee_id = e.employee_ID" +
-                             "LEFT JOIN job j ON j.job_id = ehc.job_id" +
-                             "LEFT JOIN employee_has_address eha ON eha.employee_id = e.employee_ID" +
-                             "LEFT JOIN address a ON a.address_id = eha.address_id"+
+                             " FROM employee e LEFT JOIN building b ON e.building_id = b.building_id " +
+                             " LEFT JOIN employee_has_contract ehc ON ehc.employee_id = e.employee_id" +
+                             " LEFT JOIN job j ON j.job_id = ehc.job_id" +
+                             " LEFT JOIN employee_has_address eha ON eha.employee_id = e.employee_id" +
+                             " LEFT JOIN address a ON a.address_id = eha.address_id"+
                              " WHERE e.employee_id = ?")
         ) {
             preparedStatement.setLong(1, employeeId);
+            System.out.println(employeeId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return mapToEmployeeDetailView(resultSet);
@@ -81,20 +84,19 @@ public class EmployeeRepository {
         return null;
     }
     public void editEmployee(EmployeeEditView employeeEditView) {
-        String insertPersonSQL = "UPDATE employee e SET email = ?, first_name = ?, surname = ?, building_name = ? WHERE e.employee = ?";
+        String insertEmployeeSQL = "UPDATE employee e SET email = ?, first_name = ?, surname = ? WHERE e.employee_id = ?";
         String checkIfExists = "SELECT email FROM employee e WHERE e.employee_id = ?";
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
-             PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(insertEmployeeSQL, Statement.RETURN_GENERATED_KEYS)) {
             // set prepared statement variables
             preparedStatement.setString(1, employeeEditView.getEmail());
             preparedStatement.setString(2, employeeEditView.getFirstName());
-            preparedStatement.setString(3, employeeEditView.getBuilding());
-            preparedStatement.setString(4, employeeEditView.getSurname());
-            preparedStatement.setLong(5, employeeEditView.getId());
+            preparedStatement.setString(3, employeeEditView.getSurname());
+           // preparedStatement.setString(3, employeeEditView.getBuilding());
+            preparedStatement.setLong(4, employeeEditView.getId());
 
             try {
-                // TODO set connection autocommit to false
                 connection.setAutoCommit(false);
                 try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setLong(1, employeeEditView.getId());

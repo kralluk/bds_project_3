@@ -107,7 +107,6 @@ public class EmployeesController {
                 Stage stage = new Stage();
 
                 Long employeeId = employeeView.getEmployeeId();
-                System.out.println(employeeId);
                 EmployeeDetailView employeeDetailView = employeeService.getEmployeeDetailView(employeeId);
 
                 stage.setUserData(employeeDetailView);
@@ -117,7 +116,7 @@ public class EmployeesController {
                 controller.setStage(stage);
                 fxmlLoader.setController(controller);
 
-                Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+                Scene scene = new Scene(fxmlLoader.load());
 
                 stage.setScene(scene);
 
@@ -175,6 +174,7 @@ public class EmployeesController {
         ObservableList<EmployeeBasicView> observableEmployeesList = initializeEmployeesData();
         systemEmployeesTableView.setItems(observableEmployeesList);
         systemEmployeesTableView.refresh();
-        systemEmployeesTableView.sort();
+        //systemEmployeesTableView.sort();
+        systemEmployeesTableView.getSortOrder().add(employeeId);
     }
 }
