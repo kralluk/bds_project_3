@@ -121,6 +121,26 @@ public class EmployeeRepository {
         }
     }
 
+    public void createEmployee(EmployeeCreateView employeeCreateView) {
+        String insertPersonSQL = "INSERT INTO employee (email, first_name, surname, pwd) VALUES (?,?,?,?)";
+        try (Connection connection = DataSourceConfig.getConnection();
+             // would be beneficial if I will return the created entity back
+             PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
+            // set prepared statement variables
+            preparedStatement.setString(1, employeeCreateView.getEmail());
+            preparedStatement.setString(2, employeeCreateView.getFirstName());
+            preparedStatement.setString(3, employeeCreateView.getSurname());
+            preparedStatement.setString(4, String.valueOf(employeeCreateView.getPwd()));
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new DataAccessException("Creating employee failed, no rows affected.");
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException("Creating employee failed operation on the database failed.");
+        }
+    }
     private EmployeeAuthView mapToEmployeeAuth(ResultSet rs) throws SQLException {
         EmployeeAuthView employee = new EmployeeAuthView();
         employee.setEmail(rs.getString("email"));

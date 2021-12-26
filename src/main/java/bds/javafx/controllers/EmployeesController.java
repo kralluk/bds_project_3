@@ -28,6 +28,11 @@ public class EmployeesController {
 
     private static final Logger logger = LoggerFactory.getLogger(EmployeesController.class);
 
+
+    @FXML
+    public Button addEmployeeButton;
+    @FXML
+    public Button refreshButton;
     @FXML
     private TableColumn<EmployeeBasicView, Long> employeeId;
     @FXML
@@ -149,13 +154,13 @@ public class EmployeesController {
         System.exit(0);
     }
 
-    public void handleAddPersonButton(ActionEvent   actionEvent) {
+    public void handleAddEmployeeButton(ActionEvent   actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(App.class.getResource("fxml/PersonsCreate.fxml"));
+            fxmlLoader.setLocation(App.class.getResource("/bds.javafx/fxml/EmployeeCreate.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             Stage stage = new Stage();
-            stage.setTitle("BDS JavaFX Create Person");
+            stage.setTitle("Create Employee");
             stage.setScene(scene);
 
 //            Stage stageOld = (Stage) signInButton.getScene().getWindow();

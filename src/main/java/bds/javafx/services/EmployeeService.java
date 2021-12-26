@@ -2,7 +2,7 @@ package bds.javafx.services;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import bds.javafx.api.EmployeeBasicView;
-//import bds.javafx.api.EmployeeCreateView;
+import bds.javafx.api.EmployeeCreateView;
 import bds.javafx.api.EmployeeDetailView;
 import bds.javafx.api.EmployeeEditView;
 import bds.javafx.data.EmployeeRepository;
@@ -27,7 +27,7 @@ public class EmployeeService {
     public void editEmployee(EmployeeEditView employeeEditView) {
         employeeRepository.editEmployee(employeeEditView);
     }
-    /*public void createEmployee(EmployeeCreateView employeeCreateView) {
+    public void createEmployee(EmployeeCreateView employeeCreateView) {
         // the following three lines can be written in one code line (only for more clear explanation it is written in three lines
         char[] originalPassword = employeeCreateView.getPwd();
         char[] hashedPassword = hashPassword(originalPassword);
@@ -36,9 +36,6 @@ public class EmployeeService {
         employeeRepository.createEmployee(employeeCreateView);
     }
 
-    public void editEmployee(EmployeeEditView employeeEditView) {
-        employeeRepository.editEmployee(employeeEditView);
-    }*/
 
     /**
      * <p>
