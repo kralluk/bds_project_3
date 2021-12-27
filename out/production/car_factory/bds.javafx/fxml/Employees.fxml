@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bds.javafx.controllers.EmployeesController">
+   <children>
+      <TableView fx:id="systemEmployeesTableView" layoutX="25.0" layoutY="21.0" prefHeight="344.0" prefWidth="550.0">
+        <columns>
+          <TableColumn fx:id="employeeId" prefWidth="110.0" text="ID" />
+          <TableColumn fx:id="FirstName" prefWidth="110.0" text="Firstname" />
+            <TableColumn fx:id="Surname" prefWidth="110.0" text="Surname" />
+            <TableColumn fx:id="Email" prefWidth="110.0" text="Email" />
+            <TableColumn fx:id="Building" prefWidth="110.0" text="Building" />
+        </columns>
+
+      </TableView>
+      <Button fx:id="refreshButton" layoutX="274.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
+   </children>
+</AnchorPane>
