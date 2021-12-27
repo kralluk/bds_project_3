@@ -6,7 +6,7 @@ public class EmployeeCreateView {
     private String email;
     private String firstName;
     private String surname;
-    private String building;
+    private Long buildingID;
     private char[] pwd;
 
     public String getEmail() {
@@ -33,12 +33,12 @@ public class EmployeeCreateView {
         this.surname = surname;
     }
 
-    public String getBuilding() {
-        return building;
+    public Long getBuildingID() {
+        return buildingID;
     }
 
-    public void setBuilding(String building) {
-        this.building = building;
+    public void setBuildingID(Long buildingID) {
+        this.buildingID = buildingID;
     }
 
     public char[] getPwd() {
@@ -54,7 +54,7 @@ public class EmployeeCreateView {
         return "PersonCreateView{" +
                 "email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
-               //", building='" + building + '\'' +
+               ", buildingID='" + buildingID + '\'' +
                 ", surname='" + surname + '\'' +
                 ", pwd=" + Arrays.toString(pwd) +
                 '}';

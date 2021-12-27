@@ -36,7 +36,7 @@ public class EmployeeCreateController {
     private TextField newEmployeeSurname;
 
     @FXML
-    private TextField newEmployeeBuilding;
+    private TextField newEmployeeBuildingID;
 
     @FXML
     private TextField newEmployeePwd;
@@ -54,7 +54,7 @@ public class EmployeeCreateController {
         validation.registerValidator(newEmployeeEmail, Validator.createEmptyValidator("The email must not be empty."));
         validation.registerValidator(newEmployeeFirstName, Validator.createEmptyValidator("The first name must not be empty."));
         validation.registerValidator(newEmployeeSurname, Validator.createEmptyValidator("The surname must not be empty."));
-       // validation.registerValidator(newEmployeeBuilding, Validator.createEmptyValidator("The building must not be empty."));
+        validation.registerValidator(newEmployeeBuildingID, Validator.createEmptyValidator("The building must not be empty."));
         validation.registerValidator(newEmployeePwd, Validator.createEmptyValidator("The password must not be empty."));
 
         newEmployeeCreateEmployee.disableProperty().bind(validation.invalidProperty());
@@ -67,7 +67,7 @@ public class EmployeeCreateController {
         String email = newEmployeeEmail.getText();
         String firstName = newEmployeeFirstName.getText();
         String surname = newEmployeeSurname.getText();
-        //String building = newEmployeeBuilding.getText();
+        Long buildingID = Long.valueOf(newEmployeeBuildingID.getText());
         String password = newEmployeePwd.getText();
 
         EmployeeCreateView employeeCreateView = new EmployeeCreateView();
@@ -75,7 +75,7 @@ public class EmployeeCreateController {
         employeeCreateView.setEmail(email);
         employeeCreateView.setFirstName(firstName);
         employeeCreateView.setSurname(surname);
-        //employeeCreateView.setBuilding(building);
+        employeeCreateView.setBuildingID(buildingID);
 
         employeeService.createEmployee(employeeCreateView);
 

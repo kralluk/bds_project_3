@@ -154,7 +154,7 @@ public class EmployeesController {
         System.exit(0);
     }
 
-    public void handleAddEmployeeButton(ActionEvent   actionEvent) {
+    public void handleAddEmployeeButton(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(App.class.getResource("/bds.javafx/fxml/EmployeeCreate.fxml"));

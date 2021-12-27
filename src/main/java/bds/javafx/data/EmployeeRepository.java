@@ -122,7 +122,7 @@ public class EmployeeRepository {
     }
 
     public void createEmployee(EmployeeCreateView employeeCreateView) {
-        String insertPersonSQL = "INSERT INTO employee (email, first_name, surname, pwd) VALUES (?,?,?,?)";
+        String insertPersonSQL = "INSERT INTO employee (email, first_name, surname, building_id, pwd) VALUES (?,?,?,?,?)";
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -130,7 +130,8 @@ public class EmployeeRepository {
             preparedStatement.setString(1, employeeCreateView.getEmail());
             preparedStatement.setString(2, employeeCreateView.getFirstName());
             preparedStatement.setString(3, employeeCreateView.getSurname());
-            preparedStatement.setString(4, String.valueOf(employeeCreateView.getPwd()));
+            preparedStatement.setLong(4, employeeCreateView.getBuildingID());
+            preparedStatement.setString(5, String.valueOf(employeeCreateView.getPwd()));
 
             int affectedRows = preparedStatement.executeUpdate();
 
