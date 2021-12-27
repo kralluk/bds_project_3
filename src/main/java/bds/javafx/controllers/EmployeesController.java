@@ -1,7 +1,10 @@
 package bds.javafx.controllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -17,12 +20,14 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import bds.javafx.services.EmployeeService;
+import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class EmployeesController {
 
@@ -81,6 +86,7 @@ public class EmployeesController {
     private void initializeTableViewSelection() {
         MenuItem edit = new MenuItem("Edit employee");
         MenuItem detailedView = new MenuItem("Detailed employee view");
+        MenuItem delete = new MenuItem("Delete employee");
        edit.setOnAction((ActionEvent event) -> {
             EmployeeBasicView employeeView = systemEmployeesTableView.getSelectionModel().getSelectedItem();
             try {
@@ -130,14 +136,37 @@ public class EmployeesController {
                 ExceptionHandler.handleException(ex);
             }
         });
+        delete.setOnAction((ActionEvent event) -> {
+                    EmployeeBasicView employeeView = systemEmployeesTableView.getSelectionModel().getSelectedItem();
 
+                        employeeService.deleteEmployee(employeeView);
+                        employeeDeletedConfirmationDialog();
+
+
+                });
 
         ContextMenu menu = new ContextMenu();
         menu.getItems().add(edit);
         menu.getItems().addAll(detailedView);
+        menu.getItems().add(delete);
         systemEmployeesTableView.setContextMenu(menu);
     }
+    private void employeeDeletedConfirmationDialog() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Employee Deleted Confirmation");
+        alert.setHeaderText("Employee was successfully deleted.");
 
+        Timeline idlestage = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                alert.setResult(ButtonType.CANCEL);
+                alert.hide();
+            }
+        }));
+        idlestage.setCycleCount(1);
+        idlestage.play();
+        Optional<ButtonType> result = alert.showAndWait();
+    }
     private ObservableList<EmployeeBasicView> initializeEmployeesData() {
         List<EmployeeBasicView> employees = employeeService.getEmployeesBasicView();
         return FXCollections.observableArrayList(employees);

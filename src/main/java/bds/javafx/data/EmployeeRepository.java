@@ -142,6 +142,21 @@ public class EmployeeRepository {
             throw new DataAccessException("Creating employee failed operation on the database failed.");
         }
     }
+    public void deleteEmployee(EmployeeBasicView employeeBasicView) {
+        String deleteEmployeeSQL = "DELETE FROM employee WHERE employee_id = ?";
+        try (Connection connection = DataSourceConfig.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(deleteEmployeeSQL, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setLong(1, employeeBasicView.getEmployeeId());
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new DataAccessException("Deleting employee failed, no rows affected.");
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException("Deleting employee failed operation on the database failed.");
+        }
+    }
     private EmployeeAuthView mapToEmployeeAuth(ResultSet rs) throws SQLException {
         EmployeeAuthView employee = new EmployeeAuthView();
         employee.setEmail(rs.getString("email"));

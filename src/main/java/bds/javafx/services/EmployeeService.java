@@ -35,6 +35,10 @@ public class EmployeeService {
 
         employeeRepository.createEmployee(employeeCreateView);
     }
+    public void deleteEmployee(EmployeeBasicView employeeBasicView)
+    {
+        employeeRepository.deleteEmployee(employeeBasicView);
+    }
 
 
     /**
