@@ -1,6 +1,7 @@
 # Project exclude paths
 /target/
 
+
 # Maven
 logs/
 target/
