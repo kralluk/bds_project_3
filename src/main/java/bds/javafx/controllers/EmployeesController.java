@@ -33,7 +33,8 @@ public class EmployeesController {
 
     private static final Logger logger = LoggerFactory.getLogger(EmployeesController.class);
 
-
+    @FXML
+    public Button injectButton;
     @FXML
     public Button addEmployeeButton;
     @FXML
@@ -215,5 +216,25 @@ public class EmployeesController {
         systemEmployeesTableView.refresh();
         //systemEmployeesTableView.sort();
         systemEmployeesTableView.getSortOrder().add(employeeId);
+    }
+    public void handleInjectButton(ActionEvent actionEvent){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(App.class.getResource("/bds.javafx/fxml/SQLInjection.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Sql Injection Simulation");
+            stage.setScene(scene);
+
+//            Stage stageOld = (Stage) signInButton.getScene().getWindow();
+//            stageOld.close();
+//
+//            stage.getIcons().add(new Image(App.class.getResourceAsStream("logos/vut.jpg")));
+//            authConfirmDialog();
+
+            stage.show();
+        } catch (IOException ex) {
+            ExceptionHandler.handleException(ex);
+        }
     }
 }

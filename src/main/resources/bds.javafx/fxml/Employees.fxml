@@ -17,5 +17,6 @@
       </TableView>
        <Button fx:id="addEmployeeButton" layoutX="481.0" layoutY="371.0" mnemonicParsing="false" onAction="#handleAddEmployeeButton" text="Add employee" />
       <Button fx:id="refreshButton" layoutX="272.0" layoutY="371.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
+      <Button fx:id="injectButton" layoutX="25.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleInjectButton" text="SQL injection simulation" />
    </children>
 </AnchorPane>
