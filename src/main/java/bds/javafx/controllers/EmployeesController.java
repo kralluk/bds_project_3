@@ -138,11 +138,7 @@ public class EmployeesController {
         });
         delete.setOnAction((ActionEvent event) -> {
                     EmployeeBasicView employeeView = systemEmployeesTableView.getSelectionModel().getSelectedItem();
-
-                        employeeService.deleteEmployee(employeeView);
-                        employeeDeletedConfirmationDialog();
-
-
+                        employeeDeleteQuestionDialog(employeeView);
                 });
 
         ContextMenu menu = new ContextMenu();
@@ -150,6 +146,15 @@ public class EmployeesController {
         menu.getItems().addAll(detailedView);
         menu.getItems().add(delete);
         systemEmployeesTableView.setContextMenu(menu);
+    }
+    private void employeeDeleteQuestionDialog(EmployeeBasicView employeeView){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Do you really want to delete this employee?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == ButtonType.OK) {
+            employeeService.deleteEmployee(employeeView);
+            employeeDeletedConfirmationDialog();
+        }
     }
     private void employeeDeletedConfirmationDialog() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -187,7 +192,7 @@ public class EmployeesController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(App.class.getResource("/bds.javafx/fxml/EmployeeCreate.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+            Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setTitle("Create Employee");
             stage.setScene(scene);

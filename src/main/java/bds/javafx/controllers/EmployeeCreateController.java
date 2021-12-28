@@ -2,13 +2,17 @@ package bds.javafx.controllers;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.util.Duration;
 import bds.javafx.api.EmployeeCreateView;
 import bds.javafx.data.EmployeeRepository;
@@ -18,11 +22,15 @@ import org.controlsfx.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
 import java.util.Optional;
 
 public class EmployeeCreateController {
 
     private static final Logger logger = LoggerFactory.getLogger(EmployeeCreateController.class);
+
+    @FXML
+    private ComboBox<String> newEmployeeBuilding ;
 
     @FXML
     public Button newEmployeeCreateEmployee;
@@ -36,9 +44,6 @@ public class EmployeeCreateController {
     private TextField newEmployeeSurname;
 
     @FXML
-    private TextField newEmployeeBuildingID;
-
-    @FXML
     private TextField newEmployeePwd;
 
     private EmployeeService employeeService;
@@ -49,12 +54,16 @@ public class EmployeeCreateController {
     public void initialize() {
         employeeRepository = new EmployeeRepository();
         employeeService = new EmployeeService(employeeRepository);
-
+        ObservableList<String> buildings = FXCollections.observableArrayList("výroba","účetnictví", "headquarters", "závodní jídelna", "odpadová hala", "strojírenství");
+        newEmployeeBuilding.setItems(buildings);
+        /*int bid = newEmployeeBuilding.getSelectionModel().getSelectedIndex();
+        System.out.println(bid);*/
         validation = new ValidationSupport();
         validation.registerValidator(newEmployeeEmail, Validator.createEmptyValidator("The email must not be empty."));
         validation.registerValidator(newEmployeeFirstName, Validator.createEmptyValidator("The first name must not be empty."));
         validation.registerValidator(newEmployeeSurname, Validator.createEmptyValidator("The surname must not be empty."));
-        validation.registerValidator(newEmployeeBuildingID, Validator.createEmptyValidator("The building must not be empty."));
+        validation.registerValidator(newEmployeeBuilding, Validator.createEmptyValidator("The building must not be empty."));
+        //validation.registerValidator(newEmployeeBuildingID, Validator.createEmptyValidator("The building must not be empty."));
         validation.registerValidator(newEmployeePwd, Validator.createEmptyValidator("The password must not be empty."));
 
         newEmployeeCreateEmployee.disableProperty().bind(validation.invalidProperty());
@@ -62,12 +71,13 @@ public class EmployeeCreateController {
         logger.info("EmployeeCreateController initialized");
     }
 
+
     @FXML
     void handleCreateNewEmployee(ActionEvent event) {
         String email = newEmployeeEmail.getText();
         String firstName = newEmployeeFirstName.getText();
         String surname = newEmployeeSurname.getText();
-        Long buildingID = Long.valueOf(newEmployeeBuildingID.getText());
+        int buildingID = newEmployeeBuilding.getSelectionModel().getSelectedIndex()+1;//Long.valueOf(newEmployeeBuildingID.getText());
         String password = newEmployeePwd.getText();
 
         EmployeeCreateView employeeCreateView = new EmployeeCreateView();

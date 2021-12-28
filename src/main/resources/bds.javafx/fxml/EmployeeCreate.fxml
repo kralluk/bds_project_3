@@ -39,7 +39,7 @@
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-                <Label text="building ID" GridPane.rowIndex="4">
+                <Label text="building" GridPane.rowIndex="4">
                     <padding>
                         <Insets left="5.0" />
                     </padding>
@@ -47,11 +47,11 @@
                 <TextField fx:id="newEmployeeEmail" promptText="type new employee email" GridPane.columnIndex="1" />
                 <TextField fx:id="newEmployeeFirstName" promptText="type new employee first name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField fx:id="newEmployeeSurname" promptText="type new employee surname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="newEmployeePwd" promptText="type new employee password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-             <TextField fx:id="newEmployeeBuildingID" promptText="type new employee building id" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <TextField fx:id="newEmployeePwd" prefHeight="25.0" prefWidth="183.0" promptText="type new employee password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ComboBox fx:id="newEmployeeBuilding" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             </children>
         </GridPane>
-        <Button fx:id="newEmployeeCreateEmployee" layoutX="274.0" layoutY="340.0" mnemonicParsing="false" onAction="#handleCreateNewEmployee" text="create" />
+        <Button fx:id="newEmployeeCreateEmployee" layoutX="276.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleCreateNewEmployee" text="create" />
     </children>
 
 

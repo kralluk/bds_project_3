@@ -6,7 +6,7 @@ public class EmployeeCreateView {
     private String email;
     private String firstName;
     private String surname;
-    private Long buildingID;
+    private int buildingID;
     private char[] pwd;
 
     public String getEmail() {
@@ -33,11 +33,11 @@ public class EmployeeCreateView {
         this.surname = surname;
     }
 
-    public Long getBuildingID() {
+    public int getBuildingID() {
         return buildingID;
     }
 
-    public void setBuildingID(Long buildingID) {
+    public void setBuildingID(int buildingID) {
         this.buildingID = buildingID;
     }
 
