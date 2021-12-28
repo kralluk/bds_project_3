@@ -1,5 +1,6 @@
 package bds.javafx.controllers;
 
+import bds.javafx.App;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -12,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
 import javafx.util.Duration;
 import bds.javafx.api.EmployeeCreateView;
 import bds.javafx.data.EmployeeRepository;
@@ -52,18 +52,16 @@ public class EmployeeCreateController {
 
     @FXML
     public void initialize() {
+
         employeeRepository = new EmployeeRepository();
         employeeService = new EmployeeService(employeeRepository);
         ObservableList<String> buildings = FXCollections.observableArrayList("výroba","účetnictví", "headquarters", "závodní jídelna", "odpadová hala", "strojírenství");
         newEmployeeBuilding.setItems(buildings);
-        /*int bid = newEmployeeBuilding.getSelectionModel().getSelectedIndex();
-        System.out.println(bid);*/
         validation = new ValidationSupport();
         validation.registerValidator(newEmployeeEmail, Validator.createEmptyValidator("The email must not be empty."));
         validation.registerValidator(newEmployeeFirstName, Validator.createEmptyValidator("The first name must not be empty."));
         validation.registerValidator(newEmployeeSurname, Validator.createEmptyValidator("The surname must not be empty."));
         validation.registerValidator(newEmployeeBuilding, Validator.createEmptyValidator("The building must not be empty."));
-        //validation.registerValidator(newEmployeeBuildingID, Validator.createEmptyValidator("The building must not be empty."));
         validation.registerValidator(newEmployeePwd, Validator.createEmptyValidator("The password must not be empty."));
 
         newEmployeeCreateEmployee.disableProperty().bind(validation.invalidProperty());

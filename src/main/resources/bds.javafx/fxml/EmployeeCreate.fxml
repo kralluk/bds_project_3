@@ -2,14 +2,16 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bds.javafx.controllers.EmployeeCreateController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bds.javafx.controllers.EmployeeCreateController">
     <children>
-        <GridPane layoutX="22.0" layoutY="22.0" prefHeight="311.0" prefWidth="549.0">
+        <GridPane layoutX="22.0" layoutY="42.0" prefHeight="291.0" prefWidth="303.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.39996337890625" minWidth="10.0" prefWidth="100.5999755859375" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="449.4000244140625" minWidth="10.0" prefWidth="449.4000244140625" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.39996337890625" minWidth="10.0" prefWidth="187.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="449.4000244140625" minWidth="10.0" prefWidth="344.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -23,35 +25,58 @@
                     <padding>
                         <Insets left="5.0" />
                     </padding>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
                 </Label>
                 <Label text="first name" GridPane.rowIndex="1">
                     <padding>
                         <Insets left="5.0" />
                     </padding>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
                 </Label>
                 <Label text="surname" GridPane.rowIndex="2">
                     <padding>
                         <Insets left="5.0" />
                     </padding>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
                 </Label>
-                <Label text="pwd" GridPane.rowIndex="3">
+                <Label text="password" GridPane.rowIndex="3">
                     <padding>
                         <Insets left="5.0" />
                     </padding>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
                 </Label>
                 <Label text="building" GridPane.rowIndex="4">
                     <padding>
                         <Insets left="5.0" />
                     </padding>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
                 </Label>
-                <TextField fx:id="newEmployeeEmail" promptText="type new employee email" GridPane.columnIndex="1" />
-                <TextField fx:id="newEmployeeFirstName" promptText="type new employee first name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="newEmployeeEmail" prefHeight="25.0" prefWidth="299.0" promptText="type new employee email" GridPane.columnIndex="1" />
+                <TextField fx:id="newEmployeeFirstName" prefHeight="25.0" prefWidth="275.0" promptText="type new employee first name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField fx:id="newEmployeeSurname" promptText="type new employee surname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField fx:id="newEmployeePwd" prefHeight="25.0" prefWidth="183.0" promptText="type new employee password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ComboBox fx:id="newEmployeeBuilding" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             </children>
         </GridPane>
-        <Button fx:id="newEmployeeCreateEmployee" layoutX="276.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleCreateNewEmployee" text="create" />
+        <Button fx:id="newEmployeeCreateEmployee" layoutX="276.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleCreateNewEmployee" text="create">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <ImageView fitHeight="208.0" fitWidth="212.0" layoutX="351.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/employee.PNG" />
+         </image>
+      </ImageView>
     </children>
 
 
