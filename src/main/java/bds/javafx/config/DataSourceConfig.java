@@ -15,7 +15,7 @@ import java.util.Properties;
 /**
  * Datasource configuration. For the implementation the HikariDataSource is used.
  */
-public class DataSourceConfig {
+public class DataSourceConfig  {
 
     private static final Logger logger = LoggerFactory.getLogger(DataSourceConfig.class);
 

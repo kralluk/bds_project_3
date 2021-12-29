@@ -1,4 +1,5 @@
 package bds.javafx.api;
+import javafx.beans.property.StringProperty;
 
 public class SQLInjectionView {
 
@@ -22,11 +23,11 @@ public class SQLInjectionView {
         this.email = email;
     }
 
-    public String getFullName() {
+    public String getName() {
         return name;
     }
 
-    public void setFullName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

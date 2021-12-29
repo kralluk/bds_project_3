@@ -13,7 +13,7 @@ public class SQLInjectionService {
         this.injectionRepository = injectionRepository;
     }
 
-    public List<SQLInjectionView> findByIDStatement(Long id) {
+    public List<SQLInjectionView> findByIDStatement(String id) {
         return injectionRepository.findByIDStatement(id);
     }
 }
