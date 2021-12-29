@@ -34,6 +34,10 @@ public class EmployeesController {
     private static final Logger logger = LoggerFactory.getLogger(EmployeesController.class);
 
     @FXML
+    public Button findButton;
+    @FXML
+    public TextField findEmployeeTextField;
+    @FXML
     public Button injectButton;
     @FXML
     public Button addEmployeeButton;
@@ -236,5 +240,11 @@ public class EmployeesController {
         } catch (IOException ex) {
             ExceptionHandler.handleException(ex);
         }
+    }
+    public void handleFindButton(ActionEvent actionEvent) {
+        List<EmployeeBasicView> employeesByName = employeeService.getEmployeesByName(findEmployeeTextField.getText());
+        ObservableList<EmployeeBasicView> observableEmployeesList = FXCollections.observableArrayList(employeesByName);
+        systemEmployeesTableView.setItems(observableEmployeesList);
+        systemEmployeesTableView.getSortOrder().add(employeeId);
     }
 }

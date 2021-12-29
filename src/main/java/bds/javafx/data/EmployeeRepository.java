@@ -43,6 +43,26 @@ public class EmployeeRepository {
             throw new DataAccessException("Employee basic view could not be loaded.", e);
         }
     }
+    public List<EmployeeBasicView> getEmployeesByName(String firstname) {
+        System.out.println(firstname);
+        try (Connection connection = DataSourceConfig.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     " SELECT e.employee_id, e.first_name, e.surname, e.email, b.building_name FROM employee e " +
+                             " LEFT JOIN building b ON e.building_id = b.building_id WHERE e.first_name =?");
+        ) {
+            preparedStatement.setString(1, firstname);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    List<EmployeeBasicView> employeeBasicViews = new ArrayList<>();
+                    while (resultSet.next()) {
+                        employeeBasicViews.add(mapToEmployeeBasicView(resultSet));
+                    }
+                    return employeeBasicViews;
+                }
+            } catch(SQLException e){
+                throw new DataAccessException("Employee basic view could not be loaded.", e);
+            }
+
+    }
    /* public List<EmployeeBasicView> findAll() {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
@@ -72,7 +92,6 @@ public class EmployeeRepository {
                              " WHERE e.employee_id = ?")
         ) {
             preparedStatement.setLong(1, employeeId);
-            System.out.println(employeeId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return mapToEmployeeDetailView(resultSet);

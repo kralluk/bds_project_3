@@ -24,6 +24,9 @@ public class EmployeeService {
     public List<EmployeeBasicView> getEmployeesBasicView() {
         return employeeRepository.getEmployeesBasicView();
     }
+    public List<EmployeeBasicView> getEmployeesByName(String name) {
+        return employeeRepository.getEmployeesByName(name);
+    }
     public void editEmployee(EmployeeEditView employeeEditView) {
         employeeRepository.editEmployee(employeeEditView);
     }
