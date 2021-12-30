@@ -8,11 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import bds.javafx.api.EmployeeCreateView;
 import bds.javafx.data.EmployeeRepository;
@@ -29,6 +26,10 @@ public class EmployeeCreateController {
 
     private static final Logger logger = LoggerFactory.getLogger(EmployeeCreateController.class);
 
+    @FXML
+    public Label exitButton;
+    @FXML
+    public Label minimizeButton;
     @FXML
     private ComboBox<String> newEmployeeBuilding ;
 
@@ -105,6 +106,20 @@ public class EmployeeCreateController {
         idlestage.setCycleCount(1);
         idlestage.play();
         Optional<ButtonType> result = alert.showAndWait();
+    }
+    @FXML
+    private void handleClose(javafx.scene.input.MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() == exitButton) {
+            Stage stage = (Stage)((Label)mouseEvent.getSource()).getScene().getWindow();
+            stage.close();
+        }
+    }
+    @FXML
+    private void handleMinimize(javafx.scene.input.MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() == minimizeButton) {
+            Stage stage = (Stage)((Label)mouseEvent.getSource()).getScene().getWindow();
+            stage.setIconified(true);
+        }
     }
 
 }

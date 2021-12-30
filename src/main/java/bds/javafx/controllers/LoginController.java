@@ -20,12 +20,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -40,6 +42,10 @@ public class LoginController {
     @FXML
     private Button signInButton;
     @FXML
+    private Label exitButton;
+    @FXML
+    public Label minimizeButton;
+    @FXML
     private TextField usernameTextfield;
     @FXML
     private PasswordField passwordTextField;
@@ -51,9 +57,10 @@ public class LoginController {
 
     public LoginController() {
     }
-
     @FXML
     private void initialize() {
+        GlyphsDude.setIcon(exitButton, FontAwesomeIcon.CLOSE, "1.3em");
+        GlyphsDude.setIcon(minimizeButton, FontAwesomeIcon.MINUS, "1.3em");
         GlyphsDude.setIcon(signInButton, FontAwesomeIcon.SIGN_IN, "1em");
         GlyphsDude.setIcon(usernameLabel, FontAwesomeIcon.USER, "2em");
         GlyphsDude.setIcon(passwordLabel, FontAwesomeIcon.USER_SECRET, "2em");
@@ -120,8 +127,9 @@ public class LoginController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(App.class.getResource("/bds.javafx/fxml/Employees.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());//, 1050, 600);
+            Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setTitle("Database of Employees");
             stage.setScene(scene);
 
@@ -171,7 +179,19 @@ public class LoginController {
             System.out.println("cancel clicked");
         }
     }
-
+    @FXML
+    private void handleClose(javafx.scene.input.MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() == exitButton) {
+            System.exit(0);
+        }
+    }
+    @FXML
+    private void handleMinimize(javafx.scene.input.MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() == minimizeButton) {
+            Stage stage = (Stage)((Label)mouseEvent.getSource()).getScene().getWindow();
+            stage.setIconified(true);
+        }
+    }
     public void handleOnEnterActionPassword(ActionEvent dragEvent) {
         handleSignIn();
     }

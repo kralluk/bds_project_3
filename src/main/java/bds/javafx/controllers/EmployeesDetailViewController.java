@@ -1,7 +1,10 @@
 package bds.javafx.controllers;
 
 import bds.javafx.api.EmployeeDetailView;
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -11,6 +14,10 @@ public class EmployeesDetailViewController {
 
     private static final Logger logger = LoggerFactory.getLogger(EmployeesDetailViewController.class);
 
+    @FXML
+    private Label exitButton;
+    @FXML
+    public Label minimizeButton;
     @FXML
     private TextField idTextField;
 
@@ -57,6 +64,8 @@ public class EmployeesDetailViewController {
 
     @FXML
     public void initialize() {
+        GlyphsDude.setIcon(exitButton, FontAwesomeIcon.CLOSE, "1.3em");
+        GlyphsDude.setIcon(minimizeButton, FontAwesomeIcon.MINUS, "1.3em");
         idTextField.setEditable(false);
         emailTextField.setEditable(false);
         firstnameTextField.setEditable(false);
@@ -78,6 +87,7 @@ public class EmployeesDetailViewController {
 
     private void loadEmployeesData() {
         Stage stage = this.stage;
+
         if (stage.getUserData() instanceof EmployeeDetailView) {
             EmployeeDetailView employeeDetailView = (EmployeeDetailView) stage.getUserData();
             idTextField.setText(String.valueOf(employeeDetailView.getEmployeeId()));
@@ -93,6 +103,20 @@ public class EmployeesDetailViewController {
             addresstypeTextField.setText(employeeDetailView.getAddressType());
             streetnumberTextField.setText(String.valueOf(employeeDetailView.getStreetNumber()));
             zipcodeTextField.setText(String.valueOf(employeeDetailView.getZipCode()));
+        }
+    }
+    @FXML
+    private void handleClose(javafx.scene.input.MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() == exitButton) {
+            stage.close();
+           // System.exit(0);
+        }
+    }
+    @FXML
+    private void handleMinimize(javafx.scene.input.MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() == minimizeButton) {
+            Stage stage = (Stage)((Label)mouseEvent.getSource()).getScene().getWindow();
+            stage.setIconified(true);
         }
     }
 }

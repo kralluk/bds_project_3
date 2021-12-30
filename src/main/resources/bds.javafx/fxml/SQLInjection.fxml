@@ -4,24 +4,32 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bds.javafx.controllers.SQLInjectionController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: F0E09B; -fx-border-color: black;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bds.javafx.controllers.SQLInjectionController">
    <children>
-      <TableView fx:id="employeesTableView" layoutX="44.0" layoutY="169.0" prefHeight="200.0" prefWidth="512.0">
+      <TableView fx:id="employeesTableView" layoutX="44.0" layoutY="169.0" prefHeight="200.0" prefWidth="512.0" style="-fx-background-color: F5EABC;">
         <columns>
           <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="name" prefWidth="189.0" text="Full name" />
             <TableColumn fx:id="email" minWidth="1.0" prefWidth="247.0" text="Email" />
         </columns>
       </TableView>
-      <TextField fx:id="findTextField" layoutX="113.0" layoutY="46.0" prefHeight="25.0" prefWidth="153.0" text="0" />
-      <Button fx:id="findButton" layoutX="274.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleFindButton" text="Find Employee" />
-      <Button fx:id="createTableButton" layoutX="503.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleCreateTableButton" text="Create Table" />
+      <TextField fx:id="findTextField" layoutX="113.0" layoutY="46.0" prefHeight="25.0" prefWidth="153.0" style="-fx-background-color: F5EABC;" text="0" />
+      <Button fx:id="findButton" layoutX="274.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleFindButton" style="-fx-background-color: E9CF63;" text="Find Employee" />
+      <Button fx:id="createTableButton" layoutX="503.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleCreateTableButton" style="-fx-background-color: E9CF63;" text="Create Table" />
       <Label fx:id="isEmptyLabel" layoutX="97.0" layoutY="71.0" prefHeight="17.0" prefWidth="256.0" textFill="RED">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
       <Label layoutX="97.0" layoutY="50.0" text="ID:" />
-      <Label layoutX="65.0" layoutY="102.0" text="Hint for injection: instead of just number(id) type e.g. 1 or 1=1 for seeing all raws of table" />
-      <Label layoutX="140.0" layoutY="119.0" text="or 1; DROP TABLE bds.dummy_table for deleting whole table" />
+      <Label layoutX="65.0" layoutY="102.0" text="Hint for injection: instead of just number(id) type e.g. 1 or 1=1 for seeing all raws of table">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="140.0" layoutY="119.0" text="or 1; DROP TABLE bds.dummy_table for deleting whole table">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="minimizeButton" layoutX="565.0" layoutY="6.0" onMouseClicked="#handleMinimize" prefHeight="17.0" prefWidth="15.0" />
+      <Label fx:id="exitButton" layoutX="579.0" layoutY="6.0" onMouseClicked="#handleClose" prefHeight="17.0" prefWidth="15.0" />
    </children>
 </AnchorPane>

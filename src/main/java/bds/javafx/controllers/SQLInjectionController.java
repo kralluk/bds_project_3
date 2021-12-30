@@ -6,6 +6,8 @@ import bds.javafx.config.DataSourceConfig;
 import bds.javafx.data.SQLInjectionRepository;
 import bds.javafx.exceptions.DataAccessException;
 import bds.javafx.services.SQLInjectionService;
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -15,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.lang.AutoCloseable;
@@ -24,6 +27,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class SQLInjectionController {
+    @FXML
+    public Label exitButton;
+    @FXML
+    public Label minimizeButton;
     @FXML
     public Label isEmptyLabel;
     @FXML
@@ -44,6 +51,11 @@ public class SQLInjectionController {
     private SQLInjectionService injectionService;
     private SQLInjectionRepository injectionRepository;
 
+    @FXML
+    public void initialize() {
+        GlyphsDude.setIcon(exitButton, FontAwesomeIcon.CLOSE, "1.3em");
+        GlyphsDude.setIcon(minimizeButton, FontAwesomeIcon.MINUS, "1.3em");
+    }
     public void handleFindButton(ActionEvent actionEvent) {
         employeesTableView.refresh();
         injectionRepository = new SQLInjectionRepository();
@@ -102,5 +114,19 @@ public class SQLInjectionController {
         }
 
 
+    }
+    @FXML
+    private void handleClose(javafx.scene.input.MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() == exitButton) {
+            Stage stage = (Stage)((Label)mouseEvent.getSource()).getScene().getWindow();
+            stage.close();
+        }
+    }
+    @FXML
+    private void handleMinimize(javafx.scene.input.MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() == minimizeButton) {
+            Stage stage = (Stage)((Label)mouseEvent.getSource()).getScene().getWindow();
+            stage.setIconified(true);
+        }
     }
 }

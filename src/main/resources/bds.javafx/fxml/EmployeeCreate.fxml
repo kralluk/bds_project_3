@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bds.javafx.controllers.EmployeeCreateController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: F0E09B; -fx-border-color: black;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bds.javafx.controllers.EmployeeCreateController">
     <children>
         <GridPane layoutX="22.0" layoutY="42.0" prefHeight="291.0" prefWidth="303.0">
             <columnConstraints>
@@ -61,14 +61,14 @@
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
-                <TextField fx:id="newEmployeeEmail" prefHeight="25.0" prefWidth="299.0" promptText="type new employee email" GridPane.columnIndex="1" />
-                <TextField fx:id="newEmployeeFirstName" prefHeight="25.0" prefWidth="275.0" promptText="type new employee first name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="newEmployeeSurname" promptText="type new employee surname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="newEmployeePwd" prefHeight="25.0" prefWidth="183.0" promptText="type new employee password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ComboBox fx:id="newEmployeeBuilding" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <TextField fx:id="newEmployeeEmail" prefHeight="25.0" prefWidth="299.0" promptText="type new employee email" style="-fx-background-color: F5EABC;" GridPane.columnIndex="1" />
+                <TextField fx:id="newEmployeeFirstName" prefHeight="25.0" prefWidth="275.0" promptText="type new employee first name" style="-fx-background-color: F5EABC;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="newEmployeeSurname" promptText="type new employee surname" style="-fx-background-color: F5EABC;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="newEmployeePwd" prefHeight="25.0" prefWidth="183.0" promptText="type new employee password" style="-fx-background-color: F5EABC;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ComboBox fx:id="newEmployeeBuilding" prefWidth="150.0" style="-fx-background-color: F5EABC;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             </children>
         </GridPane>
-        <Button fx:id="newEmployeeCreateEmployee" layoutX="276.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleCreateNewEmployee" text="create">
+        <Button fx:id="newEmployeeCreateEmployee" layoutX="276.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleCreateNewEmployee" style="-fx-background-color: E9CF63;" text="create">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
@@ -77,6 +77,8 @@
             <Image url="@../images/employee.PNG" />
          </image>
       </ImageView>
+      <Label fx:id="minimizeButton" layoutX="558.0" layoutY="14.0" onMouseClicked="#handleMinimize" prefHeight="17.0" prefWidth="10.0" />
+      <Label fx:id="closeButton" layoutX="576.0" layoutY="14.0" onMouseClicked="#handleClose" prefHeight="17.0" prefWidth="10.0" />
     </children>
 
 

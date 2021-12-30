@@ -1,5 +1,7 @@
 package bds.javafx.controllers;
 
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -24,6 +26,10 @@ import java.util.Optional;
 public class EmployeeEditController {
     private static final Logger logger = LoggerFactory.getLogger(EmployeeEditController.class);
 
+    @FXML
+    private Label exitButton;
+    @FXML
+    public Label minimizeButton;
     @FXML
     public ComboBox<String> buildingComboBox;
     @FXML
@@ -52,6 +58,8 @@ public class EmployeeEditController {
 
     @FXML
     public void initialize() {
+        GlyphsDude.setIcon(exitButton, FontAwesomeIcon.CLOSE, "1.3em");
+        GlyphsDude.setIcon(minimizeButton, FontAwesomeIcon.MINUS, "1.3em");
         employeeRepository = new EmployeeRepository();
         employeeService = new EmployeeService(employeeRepository);
 
@@ -126,5 +134,18 @@ public class EmployeeEditController {
         idlestage.play();
         Optional<ButtonType> result = alert.showAndWait();
     }
-
+    @FXML
+    private void handleClose(javafx.scene.input.MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() == exitButton) {
+            Stage stage = (Stage)((Label)mouseEvent.getSource()).getScene().getWindow();
+            stage.close();
+        }
+    }
+    @FXML
+    private void handleMinimize(javafx.scene.input.MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() == minimizeButton) {
+            Stage stage = (Stage)((Label)mouseEvent.getSource()).getScene().getWindow();
+            stage.setIconified(true);
+        }
+    }
 }

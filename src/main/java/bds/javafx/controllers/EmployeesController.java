@@ -1,5 +1,7 @@
 package bds.javafx.controllers;
 
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -20,6 +22,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import bds.javafx.services.EmployeeService;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +36,10 @@ public class EmployeesController {
 
     private static final Logger logger = LoggerFactory.getLogger(EmployeesController.class);
 
+    @FXML
+    private Label exitButton;
+    @FXML
+    public Label minimizeButton;
     @FXML
     public Button findButton;
     @FXML
@@ -66,6 +73,8 @@ public class EmployeesController {
 
     @FXML
     private void initialize() {
+        GlyphsDude.setIcon(exitButton, FontAwesomeIcon.CLOSE, "1.3em");
+        GlyphsDude.setIcon(minimizeButton, FontAwesomeIcon.MINUS, "1.3em");
         employeeRepository = new EmployeeRepository();
         employeeService = new EmployeeService(employeeRepository);
 //        GlyphsDude.setIcon(exitMenuItem, FontAwesomeIcon.CLOSE, "1em");
@@ -97,7 +106,7 @@ public class EmployeesController {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(App.class.getResource("/bds.javafx/fxml/EmployeeEdit.fxml"));
-                Stage stage = new Stage();
+                Stage stage = new  Stage();
                 stage.setUserData(employeeView);
                 stage.setTitle("BDS JavaFX Edit Employee");
 
@@ -106,7 +115,7 @@ public class EmployeesController {
                 fxmlLoader.setController(controller);
 
                 Scene scene = new Scene(fxmlLoader.load());
-
+                stage.initStyle(StageStyle.UNDECORATED);
                 stage.setScene(scene);
 
                 stage.show();
@@ -118,6 +127,7 @@ public class EmployeesController {
         detailedView.setOnAction((ActionEvent event) -> {
             EmployeeBasicView employeeView = systemEmployeesTableView.getSelectionModel().getSelectedItem();
             try {
+
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(App.class.getResource("/bds.javafx/fxml/EmployeeDetailView.fxml"));
                 Stage stage = new Stage();
@@ -133,7 +143,7 @@ public class EmployeesController {
                 fxmlLoader.setController(controller);
 
                 Scene scene = new Scene(fxmlLoader.load());
-
+                stage.initStyle(StageStyle.UNDECORATED);
                 stage.setScene(scene);
 
                 stage.show();
@@ -197,10 +207,12 @@ public class EmployeesController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(App.class.getResource("/bds.javafx/fxml/EmployeeCreate.fxml"));
+
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             Stage stage = new Stage();
-            stage.setTitle("Create Employee");
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(scene);
+
 
 //            Stage stageOld = (Stage) signInButton.getScene().getWindow();
 //            stageOld.close();
@@ -227,7 +239,7 @@ public class EmployeesController {
             fxmlLoader.setLocation(App.class.getResource("/bds.javafx/fxml/SQLInjection.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
-            stage.setTitle("Sql Injection Simulation");
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(scene);
 
 //            Stage stageOld = (Stage) signInButton.getScene().getWindow();
@@ -246,5 +258,20 @@ public class EmployeesController {
         ObservableList<EmployeeBasicView> observableEmployeesList = FXCollections.observableArrayList(employeesByName);
         systemEmployeesTableView.setItems(observableEmployeesList);
         systemEmployeesTableView.getSortOrder().add(employeeId);
+    }
+    @FXML
+    private void handleClose(javafx.scene.input.MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() == exitButton) {
+            Stage stage = (Stage)((Label)mouseEvent.getSource()).getScene().getWindow();
+            stage.close();
+            // System.exit(0);
+        }
+    }
+    @FXML
+    private void handleMinimize(javafx.scene.input.MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() == minimizeButton) {
+            Stage stage = (Stage)((Label)mouseEvent.getSource()).getScene().getWindow();
+            stage.setIconified(true);
+        }
     }
 }

@@ -2,25 +2,46 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bds.javafx.controllers.EmployeesController">
+<AnchorPane prefHeight="492.0" prefWidth="730.0" style="-fx-background-color: F0E09B; -fx-border-color: black;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bds.javafx.controllers.EmployeesController">
    <children>
-      <TableView fx:id="systemEmployeesTableView" layoutX="25.0" layoutY="51.0" prefHeight="310.0" prefWidth="550.0">
+      <TableView fx:id="systemEmployeesTableView" layoutX="25.0" layoutY="71.0" prefHeight="370.0" prefWidth="678.0" style="-fx-background-color: F5EABC;">
         <columns>
-          <TableColumn fx:id="employeeId" prefWidth="110.0" text="ID" />
-          <TableColumn fx:id="FirstName" prefWidth="110.0" text="Firstname" />
-            <TableColumn fx:id="Surname" prefWidth="110.0" text="Surname" />
-            <TableColumn fx:id="Email" prefWidth="110.0" text="Email" />
-            <TableColumn fx:id="Building" prefWidth="110.0" text="Building" />
+          <TableColumn fx:id="employeeId" prefWidth="135.0" style="-fx-background-color: F5EABC;" text="ID" />
+          <TableColumn fx:id="FirstName" prefWidth="135.0" style="-fx-background-color: F5EABC;" text="Firstname" />
+            <TableColumn fx:id="Surname" prefWidth="135.5" style="-fx-background-color: F5EABC;" text="Surname" />
+            <TableColumn fx:id="Email" prefWidth="136.0" style="-fx-background-color: F5EABC;" text="Email" />
+            <TableColumn fx:id="Building" prefWidth="136.0" style="-fx-background-color: F5EABC;" text="Building" />
         </columns>
 
       </TableView>
-       <Button fx:id="addEmployeeButton" layoutX="481.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleAddEmployeeButton" text="Add employee" />
-      <Button fx:id="refreshButton" layoutX="272.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
-      <Button fx:id="injectButton" layoutX="25.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleInjectButton" text="SQL injection simulation" />
-      <Button fx:id="findButton" layoutX="384.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleFindButton" text="Find" />
-      <Label layoutX="64.0" layoutY="18.0" text="Find Employee by first name:" />
-      <TextField fx:id="findEmployeeTextField" layoutX="226.0" layoutY="14.0" />
-      <Button fx:id="findAllButton" layoutX="429.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Show all employees" />
+       <Button fx:id="addEmployeeButton" layoutX="610.0" layoutY="447.0" mnemonicParsing="false" onAction="#handleAddEmployeeButton" style="-fx-background-color: E9CF63;" text="Add employee">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="refreshButton" layoutX="336.0" layoutY="447.0" mnemonicParsing="false" onAction="#handleRefreshButton" style="-fx-background-color: E9CF63;" text="Refresh">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="injectButton" layoutX="25.0" layoutY="447.0" mnemonicParsing="false" onAction="#handleInjectButton" style="-fx-background-color: E9CF63;" text="SQL injection simulation">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="findButton" layoutX="420.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleFindButton" style="-fx-background-color: E9CF63;" text="Find">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Label layoutX="97.0" layoutY="38.0" text="Find Employee by first name:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="findEmployeeTextField" layoutX="263.0" layoutY="34.0" style="-fx-background-color: F5EABC;" />
+      <Button fx:id="findAllButton" layoutX="467.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleRefreshButton" style="-fx-background-color: E9CF63;" text="Show all employees">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Label fx:id="exitButton" layoutX="712.0" layoutY="6.0" onMouseClicked="#handleClose" prefHeight="17.0" prefWidth="8.0" />
+      <Label fx:id="minimizeButton" layoutX="695.0" layoutY="6.0" onMouseClicked="#handleMinimize" prefHeight="17.0" prefWidth="8.0" />
    </children>
 </AnchorPane>
