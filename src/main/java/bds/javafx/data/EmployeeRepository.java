@@ -44,7 +44,6 @@ public class EmployeeRepository {
         }
     }
     public List<EmployeeBasicView> getEmployeesByName(String firstname) {
-        System.out.println(firstname);
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      " SELECT e.employee_id, e.first_name, e.surname, e.email, b.building_name FROM bds.employee e " +
@@ -63,20 +62,6 @@ public class EmployeeRepository {
             }
 
     }
-   /* public List<EmployeeBasicView> findAll() {
-        try (Connection connection = DataSourceConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT employee_id, first_name, surname, first_name, surname, email, building_id FROM employee");
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            List<EmployeeBasicView> employees = new ArrayList<>();
-            while (resultSet.next()) {
-                employees.add(mapToEmployeeBasicView(resultSet));
-            }
-            return employees;
-        } catch (SQLException e) {
-            throw new DataAccessException("Find all users SQL failed.", e);
-        }
-    }*/
     public EmployeeDetailView findEmployeeDetailedView(Long employeeId) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
