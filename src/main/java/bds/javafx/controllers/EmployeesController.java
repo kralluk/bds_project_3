@@ -105,7 +105,7 @@ public class EmployeesController {
                 controller.setStage(stage);
                 fxmlLoader.setController(controller);
 
-                Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+                Scene scene = new Scene(fxmlLoader.load());
 
                 stage.setScene(scene);
 

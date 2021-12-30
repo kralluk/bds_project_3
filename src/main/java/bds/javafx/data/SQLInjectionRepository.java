@@ -24,7 +24,7 @@ public class SQLInjectionRepository {
         alert.showAndWait();
     }
     public List<SQLInjectionView> findByIDStatement(String id) {
-    String sqlResult = "SELECT employee_id, email, name FROM dummy_table WHERE employee_id=" + id ;
+    String sqlResult = "SELECT employee_id, email, name FROM bds.dummy_table WHERE employee_id=" + id ;
         try (Connection connection = DataSourceConfig.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sqlResult)) {

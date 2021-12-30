@@ -95,23 +95,4 @@ public class EmployeesDetailViewController {
             zipcodeTextField.setText(String.valueOf(employeeDetailView.getZipCode()));
         }
     }
-    /*private void loadEmployeesData() {
-        Stage stage = this.stage;
-        if (stage.getUserData() instanceof EmployeeDetailView) {
-            EmployeeDetailView employeeBasicView = (EmployeeDetailView) stage.getUserData();
-            idTextField.setText(String.valueOf(employeeBasicView.getEmployeeId()));
-            emailTextField.setText(employeeBasicView.getEmail());
-            firstnameTextField.setText(employeeBasicView.getFirstName());
-            surnameTextField.setText(employeeBasicView.getSurname());
-            buildingTextField.setText(employeeBasicView.getBuilding());
-            salaryTextField.setText(String.valueOf(employeeBasicView.getSalary()));
-            cityTextField.setText(employeeBasicView.getCity());
-            jobtypeTextField.setText(employeeBasicView.getJobType());
-            streetTextField.setText(employeeBasicView.getStreet());
-            contractexpirationTextField.setText(employeeBasicView.getContractExpiration());
-            addresstypeTextField.setText(employeeBasicView.getAddressType());
-            streetnumberTextField.setText(String.valueOf(employeeBasicView.getStreetNumber()));
-            zipcodeTextField.setText(String.valueOf(employeeBasicView.getZipCode()));
-        }
-    }*/
 }

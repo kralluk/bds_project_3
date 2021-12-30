@@ -4,7 +4,7 @@ public class EmployeeEditView {
     private Long id;
     private String email;
     private String firstName;
-    private String building;
+    private int building;
     private String surname;
 
     public Long getId() {
@@ -31,11 +31,11 @@ public class EmployeeEditView {
         this.firstName = firstName;
     }
 
-    public String getBuilding() {
+    public int getBuilding() {
         return building;
     }
 
-    public void setBuilding(String building) {
+    public void setBuilding(int building) {
         this.building = building;
     }
 

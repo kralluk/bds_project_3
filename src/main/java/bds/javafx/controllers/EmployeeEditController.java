@@ -2,13 +2,12 @@ package bds.javafx.controllers;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import bds.javafx.api.EmployeeBasicView;
@@ -25,6 +24,8 @@ import java.util.Optional;
 public class EmployeeEditController {
     private static final Logger logger = LoggerFactory.getLogger(EmployeeEditController.class);
 
+    @FXML
+    public ComboBox<String> buildingComboBox;
     @FXML
     public Button editEmployeeButton;
     @FXML
@@ -54,14 +55,16 @@ public class EmployeeEditController {
         employeeRepository = new EmployeeRepository();
         employeeService = new EmployeeService(employeeRepository);
 
+
+        ObservableList<String> buildings = FXCollections.observableArrayList("výroba","účetnictví", "headquarters", "závodní jídelna", "odpadová hala", "strojírenství");
+        buildingComboBox.setItems(buildings);
         validation = new ValidationSupport();
         validation.registerValidator(idTextField, Validator.createEmptyValidator("The id must not be empty."));
         idTextField.setEditable(false);
         validation.registerValidator(emailTextField, Validator.createEmptyValidator("The email must not be empty."));
         validation.registerValidator(firstNameTextField, Validator.createEmptyValidator("The first name must not be empty."));
         validation.registerValidator(surnameTextField, Validator.createEmptyValidator("The last name must not be empty."));
-        validation.registerValidator(buildingTextField, Validator.createEmptyValidator("The nickname must not be empty."));
-        buildingTextField.setEditable(false);
+        validation.registerValidator(buildingComboBox, Validator.createEmptyValidator("The building must not be empty."));
 
         editEmployeeButton.disableProperty().bind(validation.invalidProperty());
 
@@ -81,18 +84,19 @@ public class EmployeeEditController {
             emailTextField.setText(employeeBasicView.getEmail());
             firstNameTextField.setText(employeeBasicView.getFirstName());
             surnameTextField.setText(employeeBasicView.getSurname());
-            buildingTextField.setText(employeeBasicView.getBuilding());
+            buildingComboBox.setValue(employeeBasicView.getBuilding());
+           // buildingTextField.setText(employeeBasicView.getBuilding());
         }
     }
 
     @FXML
     public void handleEditEmployeeButton(ActionEvent event) {
-        // can be written easier, its just for better explanation here on so many lines
         Long id = Long.valueOf(idTextField.getText());
         String email = emailTextField.getText();
         String firstName = firstNameTextField.getText();
         String lastName = surnameTextField.getText();
-        String building = buildingTextField.getText();
+       // String building = buildingTextField.getText();
+        int building = buildingComboBox.getSelectionModel().getSelectedIndex()+1;
 
         EmployeeEditView employeeEditView = new EmployeeEditView();
         employeeEditView.setId(id);

@@ -22,6 +22,6 @@
          </font></Label>
       <Label layoutX="97.0" layoutY="50.0" text="ID:" />
       <Label layoutX="65.0" layoutY="88.0" text="Hint for injection: instead of just number(id) type e.g. 1 or 1=1 for seeing all raws of table" />
-      <Label layoutX="160.0" layoutY="105.0" text="or 1; DROP TABLE dummy_table for deleting whole table" />
+      <Label layoutX="140.0" layoutY="105.0" text="or 1; DROP TABLE bds.dummy_table for deleting whole table" />
    </children>
 </AnchorPane>

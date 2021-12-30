@@ -80,21 +80,20 @@ public class SQLInjectionController {
     public void handleCreateTableButton(ActionEvent actionEvent){
 
         try (Connection connection = DataSourceConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS dummy_table(\n" +
-                             "employee_id SERIAL PRIMARY KEY,\n" +
-                             "name VARCHAR(40) NOT NULL,\n" +
-                             "email VARCHAR(40) NOT NULL);\n" +
-                             "DO $$\n" +
-                             "BEGIN\n" +
-                             "IF (SELECT EXISTS (TABLE dummy_table)) = 'true' THEN raise notice 'hovno';\n" +
-                             "--if a > b then raise notice 'a is greater then b';\n" +
-                             "else \n" +
-                             "INSERT INTO dummy_table (name,email) values ('Pepa Novák','pepa.novak@seznam.cz');\n" +
-                             "INSERT INTO dummy_table (name,email) values ('Aneta Žaneta','zaneta.aneta@seznam.cz');\n" +
-                             "INSERT INTO dummy_table (name,email) values ('Jaromír Rukavica','rukavicka.jara@seznam.cz');\n" +
-                             "INSERT INTO dummy_table (name,email) values ('Lucie Oranžová','oranzova.lucie@seznam.cz');\n" +
-                             "END IF;\n" +
-                             "END $$;");
+             PreparedStatement preparedStatement = connection.prepareStatement(" CREATE TABLE IF NOT EXISTS bds.dummy_table(\n" +
+                             " employee_id SERIAL PRIMARY KEY,\n" +
+                             " name VARCHAR(40) NOT NULL,\n" +
+                             " email VARCHAR(40) NOT NULL);\n" +
+                             " DO $$\n" +
+                             " BEGIN\n" +
+                             " IF (SELECT EXISTS (TABLE bds.dummy_table)) = 'true' THEN raise notice 'hovno';\n" +
+                             " else \n" +
+                             " INSERT INTO bds.dummy_table (name,email) values ('Pepa Novák','pepa.novak@seznam.cz');\n" +
+                             " INSERT INTO bds.dummy_table (name,email) values ('Aneta Žaneta','zaneta.aneta@seznam.cz');\n" +
+                             " INSERT INTO bds.dummy_table (name,email) values ('Jaromír Rukavica','rukavicka.jara@seznam.cz');\n" +
+                             " INSERT INTO bds.dummy_table (name,email) values ('Lucie Oranžová','oranzova.lucie@seznam.cz');\n" +
+                             " END IF;\n" +
+                             " END $$;");
              ResultSet resultSet =  preparedStatement.executeQuery()) {
 
         } catch (SQLException e) {

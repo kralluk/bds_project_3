@@ -15,7 +15,7 @@ public class EmployeeRepository {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT email, pwd" +
-                             " FROM employee e" +
+                             " FROM bds.employee e" +
                              " WHERE e.email = ?")
         ) {
             preparedStatement.setString(1, email);
@@ -32,7 +32,7 @@ public class EmployeeRepository {
     public List<EmployeeBasicView> getEmployeesBasicView() {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT e.employee_id, e.first_name, e.surname, e.email, b.building_name FROM employee e LEFT JOIN building b ON e.building_id = b.building_id ");
+                     "SELECT e.employee_id, e.first_name, e.surname, e.email, b.building_name FROM bds.employee e LEFT JOIN bds.building b ON e.building_id = b.building_id ");
              ResultSet resultSet = preparedStatement.executeQuery()) {
             List<EmployeeBasicView> employeeBasicViews = new ArrayList<>();
             while (resultSet.next()) {
@@ -47,8 +47,8 @@ public class EmployeeRepository {
         System.out.println(firstname);
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     " SELECT e.employee_id, e.first_name, e.surname, e.email, b.building_name FROM employee e " +
-                             " LEFT JOIN building b ON e.building_id = b.building_id WHERE e.first_name =?");
+                     " SELECT e.employee_id, e.first_name, e.surname, e.email, b.building_name FROM bds.employee e " +
+                             " LEFT JOIN bds.building b ON e.building_id = b.building_id WHERE e.first_name =?");
         ) {
             preparedStatement.setString(1, firstname);
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -84,11 +84,11 @@ public class EmployeeRepository {
                              " LEFT JOIN building b ON e.building_id = b.building_id WHERE e.employee_id = ?")*/
                      "SELECT e.employee_id, first_name, surname, email, building_name, job_type,salary," +
                         "contract_expiration, address_type, city, street, street_number, zip_code" +
-                             " FROM employee e LEFT JOIN building b ON e.building_id = b.building_id " +
-                             " LEFT JOIN employee_has_contract ehc ON ehc.employee_id = e.employee_id" +
-                             " LEFT JOIN job j ON j.job_id = ehc.job_id" +
-                             " LEFT JOIN employee_has_address eha ON eha.employee_id = e.employee_id" +
-                             " LEFT JOIN address a ON a.address_id = eha.address_id"+
+                             " FROM bds.employee e LEFT JOIN bds.building b ON e.building_id = b.building_id " +
+                             " LEFT JOIN bds.employee_has_contract ehc ON ehc.employee_id = e.employee_id" +
+                             " LEFT JOIN bds.job j ON j.job_id = ehc.job_id" +
+                             " LEFT JOIN bds.employee_has_address eha ON eha.employee_id = e.employee_id" +
+                             " LEFT JOIN bds.address a ON a.address_id = eha.address_id"+
                              " WHERE e.employee_id = ?")
         ) {
             preparedStatement.setLong(1, employeeId);
@@ -103,17 +103,15 @@ public class EmployeeRepository {
         return null;
     }
     public void editEmployee(EmployeeEditView employeeEditView) {
-        String insertEmployeeSQL = "UPDATE employee e SET email = ?, first_name = ?, surname = ? WHERE e.employee_id = ?";
-        String checkIfExists = "SELECT email FROM employee e WHERE e.employee_id = ?";
+        String insertEmployeeSQL = "UPDATE bds.employee e SET email = ?, first_name = ?, surname = ?, building_id =? WHERE e.employee_id = ?";
+        String checkIfExists = "SELECT email FROM bds.employee e WHERE e.employee_id = ?";
         try (Connection connection = DataSourceConfig.getConnection();
-             // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(insertEmployeeSQL, Statement.RETURN_GENERATED_KEYS)) {
-            // set prepared statement variables
             preparedStatement.setString(1, employeeEditView.getEmail());
             preparedStatement.setString(2, employeeEditView.getFirstName());
             preparedStatement.setString(3, employeeEditView.getSurname());
-           // preparedStatement.setString(3, employeeEditView.getBuilding());
-            preparedStatement.setLong(4, employeeEditView.getId());
+            preparedStatement.setInt(4, employeeEditView.getBuilding());
+            preparedStatement.setLong(5, employeeEditView.getId());
 
             try {
                 connection.setAutoCommit(false);
@@ -141,7 +139,7 @@ public class EmployeeRepository {
     }
 
     public void createEmployee(EmployeeCreateView employeeCreateView) {
-        String insertPersonSQL = "INSERT INTO employee (email, first_name, surname, building_id, pwd) VALUES (?,?,?,?,?)";
+        String insertPersonSQL = "INSERT INTO bds.employee (email, first_name, surname, building_id, pwd) VALUES (?,?,?,?,?)";
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -162,7 +160,7 @@ public class EmployeeRepository {
         }
     }
     public void deleteEmployee(EmployeeBasicView employeeBasicView) {
-        String deleteEmployeeSQL = "DELETE FROM employee WHERE employee_id = ?";
+        String deleteEmployeeSQL = "DELETE FROM bds.employee WHERE employee_id = ?";
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(deleteEmployeeSQL, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setLong(1, employeeBasicView.getEmployeeId());
