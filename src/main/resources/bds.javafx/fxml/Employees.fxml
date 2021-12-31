@@ -8,11 +8,11 @@
    <children>
       <TableView fx:id="systemEmployeesTableView" layoutX="25.0" layoutY="71.0" prefHeight="370.0" prefWidth="678.0" style="-fx-background-color: F5EABC;">
         <columns>
-          <TableColumn fx:id="employeeId" prefWidth="135.0" style="-fx-background-color: F5EABC;" text="ID" />
-          <TableColumn fx:id="FirstName" prefWidth="135.0" style="-fx-background-color: F5EABC;" text="Firstname" />
-            <TableColumn fx:id="Surname" prefWidth="135.5" style="-fx-background-color: F5EABC;" text="Surname" />
-            <TableColumn fx:id="Email" prefWidth="136.0" style="-fx-background-color: F5EABC;" text="Email" />
-            <TableColumn fx:id="Building" prefWidth="136.0" style="-fx-background-color: F5EABC;" text="Building" />
+          <TableColumn fx:id="employeeId" prefWidth="135.0" text="ID" />
+          <TableColumn fx:id="FirstName" prefWidth="135.0" text="Firstname" />
+            <TableColumn fx:id="Surname" prefWidth="135.5" text="Surname" />
+            <TableColumn fx:id="Email" prefWidth="136.0" text="Email" />
+            <TableColumn fx:id="Building" prefWidth="136.0" text="Building" />
         </columns>
 
       </TableView>
@@ -36,7 +36,7 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <TextField fx:id="findEmployeeTextField" layoutX="263.0" layoutY="34.0" style="-fx-background-color: F5EABC;" />
+      <TextField fx:id="findEmployeeTextField" layoutX="263.0" layoutY="34.0" />
       <Button fx:id="findAllButton" layoutX="467.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleRefreshButton" style="-fx-background-color: E9CF63;" text="Show all employees">
          <font>
             <Font name="System Bold" size="12.0" />

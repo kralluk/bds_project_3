@@ -6,28 +6,67 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="544.0" style="-fx-background-color: F0E09B; -fx-border-color: BLACK;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="bds.javafx.controllers.EmployeesDetailViewController"-->
          <children>
-            <TextField fx:id="jobtypeTextField" alignment="CENTER" layoutX="57.0" layoutY="333.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: F5EABC;" />
-            <TextField fx:id="streetTextField" alignment="CENTER" layoutX="58.0" layoutY="465.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: F5EABC;" GridPane.rowIndex="1" />
-            <TextField fx:id="streetnumberTextField" alignment="CENTER" layoutX="309.0" layoutY="465.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: F5EABC;" GridPane.rowIndex="1" />
-            <Label layoutX="383.0" layoutY="308.0" text="salary" GridPane.rowIndex="1" />
-            <Label layoutX="389.0" layoutY="375.0" text="city" GridPane.rowIndex="1" />
-            <Label layoutX="125.0" layoutY="505.0" text="zip code" GridPane.rowIndex="1" />
-            <Label layoutX="361.0" layoutY="442.0" text="street number" GridPane.rowIndex="1" />
-            <Label layoutX="132.0" layoutY="442.0" text="street" GridPane.rowIndex="1" />
-            <Label layoutX="364.0" layoutY="505.0" text="address type" GridPane.rowIndex="1" />
-            <Label layoutX="97.0" layoutY="375.0" text="contract expiration" GridPane.rowIndex="1" />
-            <Label layoutX="125.0" layoutY="308.0" text="job type" GridPane.rowIndex="1" />
-            <Label layoutX="376.0" layoutY="241.0" text="building" GridPane.rowIndex="1" />
-            <Label layoutX="132.0" layoutY="241.0" text="email" GridPane.rowIndex="1" />
-            <Label layoutX="375.0" layoutY="170.0" text="surname" GridPane.rowIndex="1" />
-            <Label layoutX="257.0" layoutY="117.0" text="ID" GridPane.rowIndex="1" />
-            <Label layoutX="120.0" layoutY="170.0" text="first name" GridPane.rowIndex="1" />
-            <TextField fx:id="addresstypeTextField" alignment="CENTER" layoutX="309.0" layoutY="528.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: F5EABC;" GridPane.rowIndex="1" />
-            <TextField fx:id="buildingTextField" alignment="CENTER" layoutX="309.0" layoutY="266.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: F5EABC;" GridPane.rowIndex="2" />
-            <TextField fx:id="zipcodeTextField" alignment="CENTER" layoutX="58.0" layoutY="528.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: F5EABC;" />
-            <TextField fx:id="cityTextField" alignment="CENTER" layoutX="309.0" layoutY="401.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: F5EABC;" />
-            <TextField fx:id="idTextField" alignment="CENTER" layoutX="236.0" layoutY="141.0" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: F5EABC;" />
-            <TextField fx:id="emailTextField" alignment="CENTER" layoutX="57.0" layoutY="266.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: F5EABC;" />
+            <TextField fx:id="jobtypeTextField" alignment="CENTER" layoutX="57.0" layoutY="333.0" prefHeight="25.0" prefWidth="179.0" />
+            <TextField fx:id="streetTextField" alignment="CENTER" layoutX="58.0" layoutY="465.0" prefHeight="25.0" prefWidth="179.0" GridPane.rowIndex="1" />
+            <TextField fx:id="streetnumberTextField" alignment="CENTER" layoutX="309.0" layoutY="465.0" prefHeight="25.0" prefWidth="179.0" GridPane.rowIndex="1" />
+            <Label layoutX="383.0" layoutY="308.0" text="salary" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+            <Label layoutX="389.0" layoutY="375.0" text="city" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+            <Label layoutX="125.0" layoutY="505.0" text="zip code" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+            <Label layoutX="361.0" layoutY="442.0" text="street number" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+            <Label layoutX="132.0" layoutY="442.0" text="street" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+            <Label layoutX="364.0" layoutY="505.0" text="address type" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+            <Label layoutX="97.0" layoutY="375.0" text="contract expiration" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+            <Label layoutX="125.0" layoutY="308.0" text="job type" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+            <Label layoutX="376.0" layoutY="241.0" text="building" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+            <Label layoutX="132.0" layoutY="241.0" text="email" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+            <Label layoutX="375.0" layoutY="170.0" text="surname" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+            <Label layoutX="257.0" layoutY="117.0" text="ID" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+            <Label layoutX="120.0" layoutY="170.0" text="first name" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+            <TextField fx:id="addresstypeTextField" alignment="CENTER" layoutX="309.0" layoutY="528.0" prefHeight="25.0" prefWidth="179.0" GridPane.rowIndex="1" />
+            <TextField fx:id="buildingTextField" alignment="CENTER" layoutX="309.0" layoutY="266.0" prefHeight="25.0" prefWidth="179.0" GridPane.rowIndex="2" />
+            <TextField fx:id="zipcodeTextField" alignment="CENTER" layoutX="58.0" layoutY="528.0" prefHeight="25.0" prefWidth="179.0" />
+            <TextField fx:id="cityTextField" alignment="CENTER" layoutX="309.0" layoutY="401.0" prefHeight="25.0" prefWidth="179.0" />
+            <TextField fx:id="idTextField" alignment="CENTER" layoutX="236.0" layoutY="141.0" prefHeight="25.0" prefWidth="53.0" />
+            <TextField fx:id="emailTextField" alignment="CENTER" layoutX="57.0" layoutY="266.0" prefHeight="25.0" prefWidth="179.0" />
       <AnchorPane prefHeight="110.0" prefWidth="545.0" style="-fx-background-color: E9CF63;">
          <children>
                   <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" layoutX="154.0" layoutY="36.0" prefHeight="39.0" prefWidth="238.0" text="Employee´s details" textAlignment="CENTER">
@@ -39,9 +78,9 @@
             <Label fx:id="minimizeButton" layoutX="507.0" layoutY="6.0" onMouseClicked="#handleMinimize" prefHeight="17.0" prefWidth="12.0" textAlignment="RIGHT" />
          </children>
       </AnchorPane>
-            <TextField fx:id="firstnameTextField" alignment="CENTER" layoutX="57.0" layoutY="195.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: F5EABC;" />
-            <TextField fx:id="surnameTextField" alignment="CENTER" layoutX="309.0" layoutY="195.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: F5EABC;" />
-            <TextField fx:id="salaryTextField" alignment="CENTER" layoutX="309.0" layoutY="333.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: F5EABC;" />
-            <TextField fx:id="contractexpirationTextField" alignment="CENTER" layoutX="58.0" layoutY="401.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: F5EABC;" />
+            <TextField fx:id="firstnameTextField" alignment="CENTER" layoutX="57.0" layoutY="195.0" prefHeight="25.0" prefWidth="179.0" />
+            <TextField fx:id="surnameTextField" alignment="CENTER" layoutX="309.0" layoutY="195.0" prefHeight="25.0" prefWidth="179.0" />
+            <TextField fx:id="salaryTextField" alignment="CENTER" layoutX="309.0" layoutY="333.0" prefHeight="25.0" prefWidth="179.0" />
+            <TextField fx:id="contractexpirationTextField" alignment="CENTER" layoutX="58.0" layoutY="401.0" prefHeight="25.0" prefWidth="179.0" />
    </children>
 </AnchorPane>

@@ -192,13 +192,6 @@ public class EmployeesController {
         return FXCollections.observableArrayList(employees);
     }
 
-    /*private void loadIcons() {
-        Image vutLogoImage = new Image(App.class.getResourceAsStream("logos/vut-logo-eng.png"));
-        ImageView vutLogo = new ImageView(vutLogoImage);
-        vutLogo.setFitWidth(150);
-        vutLogo.setFitHeight(50);
-    }*/
-
     public void handleExitMenuItem(ActionEvent event) {
         System.exit(0);
     }
@@ -212,14 +205,6 @@ public class EmployeesController {
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(scene);
-
-
-//            Stage stageOld = (Stage) signInButton.getScene().getWindow();
-//            stageOld.close();
-//
-//            stage.getIcons().add(new Image(App.class.getResourceAsStream("logos/vut.jpg")));
-//            authConfirmDialog();
-
             stage.show();
         } catch (IOException ex) {
             ExceptionHandler.handleException(ex);
@@ -230,7 +215,6 @@ public class EmployeesController {
         ObservableList<EmployeeBasicView> observableEmployeesList = initializeEmployeesData();
         systemEmployeesTableView.setItems(observableEmployeesList);
         systemEmployeesTableView.refresh();
-        //systemEmployeesTableView.sort();
         systemEmployeesTableView.getSortOrder().add(employeeId);
     }
     public void handleInjectButton(ActionEvent actionEvent){
@@ -241,12 +225,6 @@ public class EmployeesController {
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(scene);
-
-//            Stage stageOld = (Stage) signInButton.getScene().getWindow();
-//            stageOld.close();
-//
-//            stage.getIcons().add(new Image(App.class.getResourceAsStream("logos/vut.jpg")));
-//            authConfirmDialog();
 
             stage.show();
         } catch (IOException ex) {
@@ -262,9 +240,9 @@ public class EmployeesController {
     @FXML
     private void handleClose(javafx.scene.input.MouseEvent mouseEvent) {
         if (mouseEvent.getSource() == exitButton) {
-            Stage stage = (Stage)((Label)mouseEvent.getSource()).getScene().getWindow();
-            stage.close();
-            // System.exit(0);
+           // Stage stage = (Stage)((Label)mouseEvent.getSource()).getScene().getWindow();
+           // stage.close();
+             System.exit(0);
         }
     }
     @FXML

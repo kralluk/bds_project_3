@@ -49,12 +49,12 @@
             <Font name="System Bold" size="12.0" />
          </font>
                 </Label>
-                <TextField fx:id="emailTextField" style="-fx-background-color: F5EABC;" GridPane.columnIndex="1" />
-                <TextField fx:id="firstNameTextField" style="-fx-background-color: F5EABC;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="surnameTextField" style="-fx-background-color: F5EABC;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <ComboBox fx:id="buildingComboBox" prefHeight="25.0" prefWidth="234.0" style="-fx-background-color: F5EABC;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="emailTextField" GridPane.columnIndex="1" />
+                <TextField fx:id="firstNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="surnameTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <ComboBox fx:id="buildingComboBox" prefHeight="25.0" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         </GridPane>
-             <TextField fx:id="idTextField" layoutX="239.0" layoutY="14.0" prefHeight="25.0" prefWidth="34.0" style="-fx-background-color: F5EABC;" />
+             <TextField fx:id="idTextField" layoutX="239.0" layoutY="14.0" prefHeight="25.0" prefWidth="34.0" />
              <Label layoutX="215.0" layoutY="18.0" text="id">
                  <padding>
                      <Insets left="5.0" />

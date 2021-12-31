@@ -35,8 +35,8 @@
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
                   <Button id="signInButton" fx:id="signInButton" mnemonicParsing="false" onAction="#signInActionHandler" prefHeight="33.0" prefWidth="90.0" style="-fx-background-color: E9CF63;" text="Sign in" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                  <TextField id="usernameTextField" fx:id="usernameTextfield" promptText="type your username" style="-fx-background-color: F5EABC;" GridPane.columnIndex="2" />
-                  <PasswordField id="passwordTextField" fx:id="passwordTextField" promptText="type your password" style="-fx-background-color: F5EABC;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField id="usernameTextField" fx:id="usernameTextfield" promptText="type your username" GridPane.columnIndex="2" />
+                  <PasswordField id="passwordTextField" fx:id="passwordTextField" promptText="type your password" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <AnchorPane layoutX="-6.0" layoutY="-10.0" prefHeight="115.0" prefWidth="606.0" style="-fx-background-color: E9CF63;">

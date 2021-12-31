@@ -1,6 +1,8 @@
 package bds.javafx.controllers;
 
 import bds.javafx.App;
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -53,7 +55,8 @@ public class EmployeeCreateController {
 
     @FXML
     public void initialize() {
-
+        GlyphsDude.setIcon(exitButton, FontAwesomeIcon.CLOSE, "1.3em");
+        GlyphsDude.setIcon(minimizeButton, FontAwesomeIcon.MINUS, "1.3em");
         employeeRepository = new EmployeeRepository();
         employeeService = new EmployeeService(employeeRepository);
         ObservableList<String> buildings = FXCollections.observableArrayList("výroba","účetnictví", "headquarters", "závodní jídelna", "odpadová hala", "strojírenství");

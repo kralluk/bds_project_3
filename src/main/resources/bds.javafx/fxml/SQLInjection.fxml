@@ -13,7 +13,7 @@
             <TableColumn fx:id="email" minWidth="1.0" prefWidth="247.0" text="Email" />
         </columns>
       </TableView>
-      <TextField fx:id="findTextField" layoutX="113.0" layoutY="46.0" prefHeight="25.0" prefWidth="153.0" style="-fx-background-color: F5EABC;" text="0" />
+      <TextField fx:id="findTextField" layoutX="113.0" layoutY="46.0" prefHeight="25.0" prefWidth="153.0" text="0" />
       <Button fx:id="findButton" layoutX="274.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleFindButton" style="-fx-background-color: E9CF63;" text="Find Employee" />
       <Button fx:id="createTableButton" layoutX="503.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleCreateTableButton" style="-fx-background-color: E9CF63;" text="Create Table" />
       <Label fx:id="isEmptyLabel" layoutX="97.0" layoutY="71.0" prefHeight="17.0" prefWidth="256.0" textFill="RED">

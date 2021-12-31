@@ -27,7 +27,7 @@ public class EmployeeEditController {
     private static final Logger logger = LoggerFactory.getLogger(EmployeeEditController.class);
 
     @FXML
-    private Label exitButton;
+    public Label exitButton;
     @FXML
     public Label minimizeButton;
     @FXML
