@@ -9,7 +9,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 1.9.2" />
-    <title>Dependencies &#x2013; Project Dependencies</title>
+    <title>Project Dependencies</title>
     <link rel="stylesheet" href="./css/maven-base.css" />
     <link rel="stylesheet" href="./css/maven-theme.css" />
     <link rel="stylesheet" href="./css/site.css" />
@@ -23,7 +23,7 @@
     </div>
     <div id="breadcrumbs">
       <div class="xleft">
-        <span id="publishDate">Last Published: 2021-11-06</span>
+        <span id="publishDate">Last Published: 2021-12-31</span>
           &#xA0;| <span id="projectVersion">Version: 1.0.0</span>
       </div>
       <div class="xright">      </div>
