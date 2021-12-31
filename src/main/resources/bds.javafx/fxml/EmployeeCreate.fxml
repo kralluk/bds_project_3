@@ -74,7 +74,7 @@
          </font></Button>
       <ImageView fitHeight="187.0" fitWidth="192.0" layoutX="371.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/employee.PNG" />
+            <Image url="@../images/employee.png" />
          </image>
       </ImageView>
       <Label fx:id="minimizeButton" layoutX="558.0" layoutY="6.0" onMouseClicked="#handleMinimize" prefHeight="17.0" prefWidth="10.0" />

@@ -1,7 +1,7 @@
 package bds.javafx.services;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import bds.javafx.api.EmployeeAuthView;
+import bds.javafx.api.ManagerAuthView;
 import bds.javafx.data.EmployeeRepository;
 import bds.javafx.exceptions.ResourceNotFoundException;
 
@@ -12,8 +12,8 @@ public class AuthService {
         this.employeeRepository = employeeRepository;
     }
 
-    private EmployeeAuthView findEmployeeByEmail(String email) {
-        return employeeRepository.findEmployeeByEmail(email);
+    private ManagerAuthView findManagerByEmail(String email) {
+        return employeeRepository.findManagerByEmail(email);
     }
 
     public boolean authenticate(String username, String password) {
@@ -21,12 +21,12 @@ public class AuthService {
             return false;
         }
 
-        EmployeeAuthView employeeAuthView = findEmployeeByEmail(username);
-        if (employeeAuthView == null) {
+        ManagerAuthView managerAuthView = findManagerByEmail(username);
+        if (managerAuthView == null) {
             throw new ResourceNotFoundException("Provided username is not found.");
         }
 
-        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), employeeAuthView.getPassword());
+        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), managerAuthView.getPassword());
         return result.verified;
     }
 }

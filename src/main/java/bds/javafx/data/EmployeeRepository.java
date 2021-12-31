@@ -3,9 +3,6 @@ package bds.javafx.data;
 import bds.javafx.api.*;
 import bds.javafx.exceptions.DataAccessException;
 import bds.javafx.config.DataSourceConfig;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 
 import java.sql.*;
@@ -14,21 +11,21 @@ import java.util.List;
 
 public class EmployeeRepository {
 
-    public EmployeeAuthView findEmployeeByEmail(String email) {
+    public ManagerAuthView findManagerByEmail(String email) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT email, pwd" +
-                             " FROM bds.employee e" +
-                             " WHERE e.email = ?")
+                             " FROM bds.manager m" +
+                             " WHERE m.email = ?")
         ) {
             preparedStatement.setString(1, email);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    return mapToEmployeeAuth(resultSet);
+                    return mapToManagerAuth(resultSet);
                 }
             }
         } catch (SQLException e) {
-            throw new DataAccessException("Find employee by ID with addresses failed.", e);
+            throw new DataAccessException("Find manager by ID with addresses failed.", e);
         }
         return null;
     }
@@ -162,11 +159,11 @@ public class EmployeeRepository {
             throw new DataAccessException("Deleting employee failed operation on the database failed.");
         }
     }
-    private EmployeeAuthView mapToEmployeeAuth(ResultSet rs) throws SQLException {
-        EmployeeAuthView employee = new EmployeeAuthView();
-        employee.setEmail(rs.getString("email"));
-        employee.setPassword(rs.getString("pwd"));
-        return employee;
+    private ManagerAuthView mapToManagerAuth(ResultSet rs) throws SQLException {
+        ManagerAuthView manager = new ManagerAuthView();
+        manager.setEmail(rs.getString("email"));
+        manager.setPassword(rs.getString("pwd"));
+        return manager;
     }
 
     private EmployeeBasicView mapToEmployeeBasicView(ResultSet rs) throws SQLException {

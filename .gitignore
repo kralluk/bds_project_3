@@ -6,6 +6,7 @@
 logs/
 target/
 # Intellij
+.log
 .idea/
 *.iml
 *.iws

@@ -1,6 +1,6 @@
 package bds.javafx.api;
 
-public class EmployeeAuthView {
+public class ManagerAuthView {
 
     private String email;
     private String password;
@@ -23,7 +23,7 @@ public class EmployeeAuthView {
 
     @Override
     public String toString() {
-        return "EmployeeAuthView{" +
+        return "ManagerAuthView{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
