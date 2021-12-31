@@ -31,7 +31,6 @@ public class EmployeeService {
         employeeRepository.editEmployee(employeeEditView);
     }
     public void createEmployee(EmployeeCreateView employeeCreateView) {
-        // the following three lines can be written in one code line (only for more clear explanation it is written in three lines
         char[] originalPassword = employeeCreateView.getPwd();
         char[] hashedPassword = hashPassword(originalPassword);
         employeeCreateView.setPwd(hashedPassword);

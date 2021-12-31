@@ -28,8 +28,6 @@ public class ExceptionHandler {
 
         alert.getDialogPane().setContent(area);
         alert.setResizable(true);
-//        alert.setHeaderText(ex.getMessage());
-//        alert.setContentText(getFullStackTrace(ex));
         alert.showAndWait();
     }
 

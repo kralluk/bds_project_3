@@ -65,8 +65,6 @@ public class EmployeeRepository {
     public EmployeeDetailView findEmployeeDetailedView(Long employeeId) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                 /*    "SELECT e.employee_id, e.first_name, e.surname, e.email, b.building_name FROM employee e" +
-                             " LEFT JOIN building b ON e.building_id = b.building_id WHERE e.employee_id = ?")*/
                      "SELECT e.employee_id, first_name, surname, email, building_name, job_type,salary," +
                         "contract_expiration, address_type, city, street, street_number, zip_code" +
                              " FROM bds.employee e LEFT JOIN bds.building b ON e.building_id = b.building_id " +
@@ -126,9 +124,7 @@ public class EmployeeRepository {
     public void createEmployee(EmployeeCreateView employeeCreateView) {
         String insertPersonSQL = "INSERT INTO bds.employee (email, first_name, surname, building_id, pwd) VALUES (?,?,?,?,?)";
         try (Connection connection = DataSourceConfig.getConnection();
-             // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
-            // set prepared statement variables
             preparedStatement.setString(1, employeeCreateView.getEmail());
             preparedStatement.setString(2, employeeCreateView.getFirstName());
             preparedStatement.setString(3, employeeCreateView.getSurname());

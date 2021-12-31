@@ -19,8 +19,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import bds.javafx.services.EmployeeService;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -77,7 +75,6 @@ public class EmployeesController {
         GlyphsDude.setIcon(minimizeButton, FontAwesomeIcon.MINUS, "1.3em");
         employeeRepository = new EmployeeRepository();
         employeeService = new EmployeeService(employeeRepository);
-//        GlyphsDude.setIcon(exitMenuItem, FontAwesomeIcon.CLOSE, "1em");
 
         employeeId.setCellValueFactory(new PropertyValueFactory<EmployeeBasicView, Long>("id"));
         FirstName.setCellValueFactory(new PropertyValueFactory<EmployeeBasicView, String>("firstname"));
@@ -92,8 +89,6 @@ public class EmployeesController {
         systemEmployeesTableView.getSortOrder().add(employeeId);
 
         initializeTableViewSelection();
-        //loadIcons();
-        //DODĚLAT
         logger.info("EmployeesController initialized");
     }
 
@@ -240,8 +235,6 @@ public class EmployeesController {
     @FXML
     private void handleClose(javafx.scene.input.MouseEvent mouseEvent) {
         if (mouseEvent.getSource() == exitButton) {
-           // Stage stage = (Stage)((Label)mouseEvent.getSource()).getScene().getWindow();
-           // stage.close();
              System.exit(0);
         }
     }

@@ -109,7 +109,6 @@ public class EmployeesDetailViewController {
     private void handleClose(javafx.scene.input.MouseEvent mouseEvent) {
         if (mouseEvent.getSource() == exitButton) {
             stage.close();
-           // System.exit(0);
         }
     }
     @FXML

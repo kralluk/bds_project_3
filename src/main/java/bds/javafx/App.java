@@ -30,7 +30,6 @@ public class App extends Application {
 
             loader = new FXMLLoader(getClass().getResource("/bds.javafx/App.fxml"));
             mainStage = loader.load();
-            //Scene scene = new Scene(mainStage);
             mainStage.setOnMousePressed(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {

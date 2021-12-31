@@ -75,7 +75,6 @@ public class LoginController {
             }
         });
 
-       // initializeLogos();
         initializeServices();
         initializeValidations();
 
@@ -93,15 +92,6 @@ public class LoginController {
         employeeRepository = new EmployeeRepository();
         authService = new AuthService(employeeRepository);
     }
-
-    /*private void initializeLogos() {
-        Image vutImage = new Image(App.class.getResourceAsStream("logos/vut-logo-eng.png"));
-        ImageView vutLogoImage = new ImageView(vutImage);
-        vutLogoImage.setFitHeight(85);
-        vutLogoImage.setFitWidth(150);
-        vutLogoImage.setPreserveRatio(true);
-        vutLogo.setGraphic(vutLogoImage);
-    }*/
 
     public void signInActionHandler(ActionEvent event) {
         handleSignIn();
@@ -136,7 +126,6 @@ public class LoginController {
             Stage stageOld = (Stage) signInButton.getScene().getWindow();
             stageOld.close();
 
-           // stage.getIcons().add(new Image(App.class.getResourceAsStream("logos/vut.jpg")));
             authConfirmDialog();
 
             stage.show();
