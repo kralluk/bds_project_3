@@ -2,7 +2,8 @@ Database application of employees in car factory
 ==========================
 
 ## Requirements
-- Git Maven
+- Git 
+- Maven
 - Java openJDK 11 or newer
 - PostgreSQL
 
